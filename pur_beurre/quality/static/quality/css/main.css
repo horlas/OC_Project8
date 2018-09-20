@@ -45,3 +45,17 @@ p, a {
 .text-icone {
     color: #345a61;
 }
+
+.bg-footer {
+    background-color:  #de9440;
+}
+
+.a-headings {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    display: block;
+    font-size: 1.8em;
+
+}
+
+
+
