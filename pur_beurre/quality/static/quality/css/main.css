@@ -1,0 +1,47 @@
+h1 {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #345a61 ;
+}
+
+p, a {
+    font-family: 'Scope One', 'Helvetica Neue', Arial, sans-serif;
+    color: #345a61;
+
+}
+
+.btn {
+
+}
+
+/*#stuff {*/
+    /*opacity: 0.0;*/
+    /*-webkit-transition: all 500ms ease-in-out;*/
+    /*-moz-transition: all 500ms ease-in-out;*/
+    /*-ms-transition: all 500ms ease-in-out;*/
+    /*-o-transition: all 500ms ease-in-out;*/
+    /*transition: all 500ms ease-in-out;*/
+/*}*/
+
+/*#hover:hover + #stuff{*/
+    /*opacity: 1.0;*/
+/*}*/
+
+.nav-link a{
+    color: #e8a75d;
+}
+
+.bg-primary {
+  background-color: #c45525 !important;
+}
+
+.bg-portofolio {
+    background-color: #86ebe6;
+}
+
+.bg-contact {
+    background-color: #e8a75d ;
+}
+
+.text-icone {
+    color: #345a61;
+}

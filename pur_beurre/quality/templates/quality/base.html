@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
   <head>
 
@@ -10,21 +10,27 @@
 
       {% load static %}
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>Pur Beurre </title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} rel="stylesheet">
+    <link href="{% static 'quality/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href= '{% static "vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href= '{% static "quality/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+    <link href= '{% static "quality/vendor/fontawesome-free/css/brands.min.css" %}' rel="stylesheet" type="text/css">
+     <link href= '{% static "quality/vendor/fontawesome-free/webfonts/fa-brands-400.svg" %}' rel="stylesheet" type="text/css">
+
+
+      <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
+
 
     <!-- Plugin CSS -->
-    <link href='{% static "vendor/magnific-popup/magnific-popup.css"%}' rel="stylesheet">
+    <link href='{% static "quality/vendor/magnific-popup/magnific-popup.css"%}' rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href= '{% static "css/creative.min.css"%}' rel="stylesheet">
+    <link href= '{% static "quality/css/creative.min.css" %}' rel="stylesheet">
+    <link href="{% static 'quality/css/main.css' %}" rel="stylesheet">
 
   </head>
 
@@ -33,24 +39,46 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img alt = "logo" src="{% static 'quality/img/logo_pur_beurre.png' %}" class="logo-navbar"/>Pur Beurre</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+
+
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                <!--formulaire de recherche-->
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </li>
+
+
+
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+              <a class="nav-link js-scroll-trigger" href="#about">Présentations</a>
             </li>
+
+
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
+
+
+            <!--Icone de connexion-->
+            <li class="nav-item">
+                <a  href="#"data-toggle="tooltip" title="Connexion"><i id="hover" class="fas fa-2x fa-user-check  mb-1 sr-icon-1" style="color:#e8a75d"></i></a>
+              <!--<a id="stuff" class="nav-link" >Connexion</a>-->
+            </li>
+
+
+
+
           </ul>
         </div>
       </div>
@@ -64,16 +92,6 @@
 
             {% block content %}{% endblock %}
 
-
-<!--{#            <h1 class="text-uppercase">#}-->
-<!--{#              <strong>Your Favorite Source of Free Bootstrap Themes</strong>#}-->
-<!--{#            </h1>#}-->
-<!--{#            <hr>#}-->
-<!--{#          </div>#}-->
-<!--{#          <div class="col-lg-8 mx-auto">#}-->
-<!--{#            <p class="text-faded mb-5">Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>#}-->
-<!--{#            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>#}-->
-<!--{#          </div>#}-->
         </div>
       </div>
     </header>
@@ -81,198 +99,290 @@
     <section class="bg-primary" id="about">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-white">We've got what you need!</h2>
+          <div class="col-lg-8 mx-auto text-center ">
+            <h2 class="section-heading text-white">Colette et Remy</h2>
             <hr class="light my-4">
-            <p class="text-faded mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-            <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+            <p class="text-faded text-justify mb-4">
+                Nous sommes une jeune startup fondée par Remy et Colette Tatou, deux restaurateurs de renom.
+                Notre restaurant, situé à Montmartre (Paris), compte une cinquantaine de couverts et ne désemplit pas.
+                Notre spécialité, la ratatouille, nous attire une clientèle internationale charmée par les délices de ce plat typique.
+            <br/>
+                Remy et Colette sont amoureux de la gastronomie française (on ne peut les blâmer !).
+                Travaillant quotidiennement avec les meilleurs produits du terroir,
+                ils affectionnent particulièrement la bonne chaire et aiment partager leur passion.
+                Il est donc normal que Remy ait sauté au plafond quand Colette, un jour de déprime,
+                sortit du placard un kilo de Nutella et l’attaqua à la petite cuillère.
+                Pourquoi ne pas opter pour une pâte à tartiner aux noisettes, plus consistante et moins sucrée ?
+                Pourquoi, oh pourquoi s’infliger une telle souffrance ? Rémy était sidéré.
+                La réponse de Colette fut simple : elle n’avait pas trouvé de substitut assez convainquant.
+                A vrai dire, elle n’avait même pas cherché. <br/>
+                Tous deux se souvinrent alors que nombre de leurs clients leur avaient compté,
+                entre deux verres, qu’il était difficile de trouver des substituts aux cochonneries
+                que nous mangions dès le petit déjeuner. <br/>
+
+                Pourquoi ne pas lancer une plateforme web en ce sens ? Voici notre mission !</p>
+
+
+            <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Connectez-vous!</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">At Your Service</h2>
-            <hr class="my-4">
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-1"></i>
-              <h3 class="mb-3">Sturdy Templates</h3>
-              <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-2"></i>
-              <h3 class="mb-3">Ready to Ship</h3>
-              <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-code text-primary mb-3 sr-icon-3"></i>
-              <h3 class="mb-3">Up to Date</h3>
-              <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
-              <h3 class="mb-3">Made with Love</h3>
-              <p class="text-muted mb-0">You have to make your websites with love these days!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="p-0" id="portfolio">
+
+    <section class="p-0 bg-portofolio " id="portfolio">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
+
+          <div class="col-md-2"></div>
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/remy/fullsize/0.jpg' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/remy/thumbnails/0.jpg' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Remy
                   </div>
                   <div class="project-name">
-                    Project Name
+                    J'aime le fromage artisannal
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <!--<div class="col-md-2"></div>-->
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/colette/fullsize/0.jpg' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/colette/thumbnails/0.jpg' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Colette
                   </div>
                   <div class="project-name">
-                    Project Name
+                    J'aime la cuisine de ma grand-mère
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <div class="col-md-2"></div>
+
+
+           <div class="col-md-2"></div>
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/remy/fullsize/2.jpg' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/remy/thumbnails/2.jpg' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Remy
                   </div>
                   <div class="project-name">
-                    Project Name
+                    La preuve en image
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <!--<div class="col-md-2"></div>-->
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/colette/fullsize/2.png' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/colette/thumbnails/2.png' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Colette
                   </div>
                   <div class="project-name">
-                    Project Name
+                    Eplucher les légumes est ma passion!
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <div class="col-md-2"></div>
+
+
+           <div class="col-md-2"></div>
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/remy/fullsize/3.jpg' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/remy/thumbnails/3.jpg' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Remy
                   </div>
                   <div class="project-name">
-                    Project Name
+                    Chez nous : venez comme vous etes!
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <!--<div class="col-md-2"></div>-->
+
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/colette/fullsize/4.png' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/colette/thumbnails/4.png' %}" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
-                    Category
+                    Colette
                   </div>
                   <div class="project-name">
-                    Project Name
+                    ...Enfin un site web utile...
                   </div>
                 </div>
               </div>
             </a>
           </div>
+
+          <div class="col-md-2"></div>
+
+           <div class="col-md-2"></div>
+
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/remy/fullsize/1.jpg' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/remy/thumbnails/1.jpg' %}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Remy
+                  </div>
+                  <div class="project-name">
+                    Le moral au fond des casseroles!
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!--<div class="col-md-2"></div>-->
+
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{% static 'quality/img/portfolio/colette/fullsize/3.png' %}">
+              <img class="img-fluid" src="{% static 'quality/img/portfolio/colette/thumbnails/3.png' %}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-category text-faded">
+                    Colette
+                  </div>
+                  <div class="project-name">
+                    Ici : pas d'huile de palme !!!
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-2"></div>
+
         </div>
       </div>
     </section>
 
-    <section class="bg-dark text-white">
-      <div class="container text-center">
-        <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-        <a class="btn btn-light btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/">Download Now!</a>
-      </div>
-    </section>
 
-    <section id="contact">
+
+
+
+    <section class="bg-contact" id="contact">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <h2 class="section-heading">Contactez-nous!</h2>
             <hr class="my-4">
-            <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+            <p class="mb-5">Vous etes enthousiasmés par notre idée de Plateforme et désirez nous soutenir dans notre initiative de mieux manger pour mieux vivre ? C'est avec grand plasir que nous accueillons vos idées et vos compliments!</p>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-4 ml-auto text-center">
-            <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
-            <p>123-456-6789</p>
+            <i class="fas fa-phone fa-3x mb-3 text-icone sr-contact-1"></i>
+            <p>09-57-88-47-90</p>
           </div>
           <div class="col-lg-4 mr-auto text-center">
-            <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
+            <i class="fas fa-envelope fa-3x mb-3 text-icone sr-contact-2"></i>
             <p>
-              <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+              <a href="mailto:your-email@your-domain.com" style="text-decoration: none">pur-beurre@resto.com</a>
             </p>
           </div>
         </div>
       </div>
     </section>
 
+
+<section id="services">
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-lg-12 text-center">-->
+            <!--<h2 class="section-heading">At Your Service</h2>-->
+            <!--<hr class="my-4">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fas fa-4x fa-gem text-icone mb-3 sr-icon-1" ></i>
+                <a href ="#"><h3 class="mb-3">Mentions légales</h3></a>
+              <p class="text-muted mb-0">Nous citons les sources de notre inspiration.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fas fa-4x fa-paper-plane text-icone mb-3 sr-icon-2"></i>
+                <a class="js-scroll-trigger" href="#contact"><h3 class="mb-3">Contact</h3></a>
+              <p class="text-muted mb-0">Nous serons heureux déchanger avec vous !</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fas fa-4x fa-gift text-icone mb-3 sr-icon-3"></i>
+                <a href="https://github.com/horlas/OC_Project8"><h3 class="mb-3">Code Pur-beurre</h3></a>
+              <p class="text-muted mb-0">Pour les développeurs, les correcteurs et les curieux !</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'quality/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'quality/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="{% static 'quality/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    <script src="{% static 'quality/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
+    <script src="{% static 'quality/vendor/magnific-popup/jquery.magnific-popup.min.js'%}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/creative.min.js"></script>
+    <script src="{% static 'quality/js/creative.min.js'%}"></script>
 
   </body>
 
