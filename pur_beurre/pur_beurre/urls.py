@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('quality/', include('quality.urls')),
     path('admin/', admin.site.urls),
+
 ]
 
 if settings.DEBUG:
