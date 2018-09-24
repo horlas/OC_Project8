@@ -21,7 +21,7 @@
      <link href= '{% static "quality/vendor/fontawesome-free/webfonts/fa-brands-400.svg" %}' rel="stylesheet" type="text/css">
 
 
-      <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
 
 
@@ -55,12 +55,9 @@
                 </form>
             </li>
 
-
-
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">Présentations</a>
             </li>
-
 
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
@@ -69,11 +66,17 @@
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
 
+              <!--Trigger element for Sign-up modal-->
+               <li class="nav-item">
+                <button class="signup-btn btn btn-primary" type="button" name="button1">Créer un compte</button>
+               </li>
 
-            <!--Icone de connexion-->
+            <!--Trigger element for Log-in modal-->
             <li class="nav-item">
-                <a  href="#"data-toggle="tooltip" title="Connexion"><i id="hover" class="fas fa-2x fa-user-check  mb-1 sr-icon-1" style="color:#e8a75d"></i></a>
-              <!--<a id="stuff" class="nav-link" >Connexion</a>-->
+                <button class="login-btn btn btn-primary" type="button" name="button">Se connecter</button>
+
+                <!--<a  href="#"data-toggle="tooltip" title="Connexion"><i id="hover" class="fas fa-2x fa-user-check  mb-1 sr-icon-1" style="color:#e8a75d"></i></a>-->
+              <!--&lt;!&ndash;<a id="stuff" class="nav-link" >Connexion</a>&ndash;&gt;-->
             </li>
 
 
@@ -83,6 +86,14 @@
         </div>
       </div>
     </nav>
+
+    <!--Modal markup placement login-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+    </div>
+    </div>
+
 
     <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
@@ -364,6 +375,30 @@
     <!-- Custom scripts for this template -->
     <script src="{% static 'quality/js/creative.min.js'%}"></script>
 
+    <!--Customs script for the project -->
+    <script src="{% static 'quality/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+
+
+    <!-- Open login modal -->
+    <script type="text/javascript">
+         $(function () {
+         // Log in button
+         $(".login-btn").modalForm({formURL: "{% url 'quality:login' %}"});
+         });
+    </script>
+
+    <!-- Open sign-up modal-->
+    <script type="text/javascript">
+        $(function () {
+        // Sign up button
+        $(".signup-btn").modalForm({formURL: "{% url 'quality:signup' %}"});
+        });
+    </script>
+
+
+
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>-->
+    <!--<script src="{% static 'quality/js/main.js'%}"></script>-->
   </body>
 
 </html>

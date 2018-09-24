@@ -1,0 +1,9 @@
+
+{% extends 'quality/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+
+{% endif %}
+{% endblock %}
