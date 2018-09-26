@@ -1,0 +1,8 @@
+venv/
+.idea/
+source.txt
+pur_beurre/quality/__pycache__/
+migrations/
+__pycache__/
+
+

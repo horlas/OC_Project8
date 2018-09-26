@@ -5,25 +5,8 @@ from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 from django.contrib.auth.forms import AuthenticationForm
 
 
-# class CreateUserForm(PopRequestMixin, CreateUpdateAjaxMixin, ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password']
-#         widgets = {
-#
-#             'username': TextInput(attrs={'class': 'form-control'}) ,
-#             'email': EmailInput(attrs={'class': 'form-control'}),
-#             'password': PasswordInput(attrs={'class': 'form-control'}) ,
-#         }
-#
-#         labels = {
-#             'username': "votre nom",
-#             'password': 'votre mot de pass',
-#             'email' : 'votre email',
-#         }
-
-
 class CustomAuthenticationForm(AuthenticationForm):
+    '''form to log an user using the django User model, this form is passed to the login view'''
 
     class Meta:
         model = User
@@ -32,6 +15,11 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class CustomUserCreationForm(PopRequestMixin, CreateUpdateAjaxMixin,
                              UserCreationForm):
+    '''form to create an user using the Django User model, this form is passed to the signup view.
+    PopRequestMixin from bootstrap_modal_forms.mixins : pops request out of the kwargs and attaches it to the form's
+    instance.
+    CreateUpdateAjaxMixin : Mixin which passes or saves object based on request type.
+    '''
     class Meta:
         model = User
         fields = ['username', 'email']

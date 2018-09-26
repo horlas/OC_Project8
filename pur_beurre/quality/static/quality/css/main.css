@@ -3,32 +3,12 @@ h1 {
     color: #345a61 ;
 }
 
-p, a {
+a {
     font-family: 'Scope One', 'Helvetica Neue', Arial, sans-serif;
     color: #345a61;
 
 }
 
-.btn {
-
-}
-
-/*#stuff {*/
-    /*opacity: 0.0;*/
-    /*-webkit-transition: all 500ms ease-in-out;*/
-    /*-moz-transition: all 500ms ease-in-out;*/
-    /*-ms-transition: all 500ms ease-in-out;*/
-    /*-o-transition: all 500ms ease-in-out;*/
-    /*transition: all 500ms ease-in-out;*/
-/*}*/
-
-/*#hover:hover + #stuff{*/
-    /*opacity: 1.0;*/
-/*}*/
-
-.nav-link a{
-    color: #e8a75d;
-}
 
 .bg-primary {
   background-color: #c45525 !important;
@@ -57,5 +37,29 @@ p, a {
 
 }
 
+#brand-name {
+    color: black;
+}
 
+.mes-account {
+    background-color: #e8a75d ;
+    border-radius: 5px;
+}
 
+.text-account {
+    color :  #c45525;
+    font-family: 'Scope One', 'Helvetica Neue', Arial, sans-serif;
+
+}
+
+.btn-account {
+    margin-top: 20px;
+    color :  #c45525;
+    padding: 1rem 2rem;
+    background-color: #345a61;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 300px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}

@@ -23,10 +23,3 @@ class CustonUserModel(TimestamptedModel):
 
     def __str__(self):
         return self.username
-
-
-# class CustomUserModel(AbstractBaseUser):
-#     user = models.OneToOneField(User, on_delete='CASCADE')
-#     email = models.EmailField(max_length=100)
-#     EMAIL_FIELDS =
-#     REQUIRED_FIELDS = ['username', 'email', 'password']

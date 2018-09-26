@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_nose',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pur_beurre',
         'USER': 'aurelia',
         'PASSWORD': '',
@@ -132,4 +133,11 @@ STATIC_URL = '/static/'
 
 INTERNAL_IPS = '127.0.0.1'
 
-LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = ''
+
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+#
+# NOSE_ARGS = [
+# '--cover-erase',
+# '--cover-package=quality',
+# ]

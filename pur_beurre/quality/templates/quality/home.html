@@ -1,9 +1,27 @@
 
 {% extends 'quality/base.html' %}
 
+{% block nav-style %}
+             <li class="nav-item">
+                 <a class="nav-link">Bonjour {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Mon compte</a>
+            </li>
+
+            <!--Deconexion-->
+            <li class="nav-item">
+               <a href="{% url 'quality:logout' %}"> <button class="btn btn-primary" type="button" name="button" >Se déconnecter</button></a>
+            </li>
+{% endblock %}
+
+
 {% block content %}
 {% if user.is_authenticated %}
   <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
 
 {% endif %}
 {% endblock %}
+
+
+
