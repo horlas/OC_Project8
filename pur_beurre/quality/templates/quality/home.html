@@ -9,7 +9,7 @@
               <a class="nav-link">Mon compte</a>
             </li>
 
-            <!--Deconexion-->
+            <!--Deconnexion-->
             <li class="nav-item">
                <a href="{% url 'quality:logout' %}"> <button class="btn btn-primary" type="button" name="button" >Se déconnecter</button></a>
             </li>
@@ -19,6 +19,13 @@
 {% block content %}
 {% if user.is_authenticated %}
   <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+
+
+          <div class="col-lg-8 mx-auto">
+            <p class="font-weight-bold mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</p>
+            <input type="text" >
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">recherche</a>
+          </div>
 
 {% endif %}
 {% endblock %}

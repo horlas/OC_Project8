@@ -367,7 +367,8 @@
         </div>
       </div>
     </section>
-
+     <!--&lt;!&ndash;Load Js for ajax &ndash;&gt;-->
+    <!--<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>-->
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'quality/vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'quality/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -382,6 +383,8 @@
 
     <!--Customs script for the project -->
     <script src="{% static 'quality/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+
+
 
 
     <!-- Open login modal -->
@@ -399,6 +402,8 @@
         $(".signup-btn").modalForm({formURL: "{% url 'quality:signup' %}"});
         });
     </script>
+
+  {% block javascript %}{% endblock %}
   </body>
 
 </html>

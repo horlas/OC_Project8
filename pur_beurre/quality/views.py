@@ -7,6 +7,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
+from django.http import JsonResponse
+from .methods import query_off
+from django_ajax.decorators import ajax
+
 
 
 from django.views.generic import TemplateView
@@ -16,6 +20,11 @@ def index(request):
    
     return render(request, 'quality/index.html')
 
+def get_query(request):
+    query = request.GET.get('query', None)
+    data = query_off(query)
+    # return JsonResponse(data, safe=False)
+    return render(request, 'quality/index.html', {'data' :data})
 
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm

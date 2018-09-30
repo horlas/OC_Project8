@@ -1,19 +1,55 @@
 {% extends 'quality/base.html' %}
+
+{% block javascript %}
+  <script>
+    $("#submit").click(function () {
+        var query = $('#query').val();
+        console.log(query);
+
+        $.ajax({
+
+            // url: $("#products").attr('query-data-url'),
+            url : "quality/query_data/",
+            data: {'query': query},
+            dateType: 'json',
+            success: function (data) {
+                console.log(data);
+                alert('Recuperation de données ! ');
+                $('#products').html(data)
+            }
+        });
+    });
+
+</script>
+{% endblock %}
+
+
 {% block content %}
+<div id = 'first_step'>
+   <h1 class="text-uppercase">
+      <strong>Du gras, oui, mais de la qualité!</strong>
+   </h1>
+   <hr>
+   <div class="col-lg-8 mx-auto">
+      <p class="font-weight-bold mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</p>
+      <input type="text" name="query" id ="query" autofocus="" class="js-send_query">
+      <button  id ="submit" type= 'submit' class="btn btn-primary btn-xl js-scroll-trigger">chercher</button>
+   </div>
+</div>
 
 
+                <section class="bg-contact"  >
+              <!--<div id="products" query-data-url= '{% url "quality:query_data" %}'>-->
+<div id="products">
+                {% for dict_item in data %}
+                  <h2>    {{dict_item}} </h2>
+
+                {%endfor%}
 
 
-    <h1 class="text-uppercase">
-              <strong>Du gras, oui, mais de la qualité!</strong>
-    </h1>
-    <hr>
-          </div>
-          <div class="col-lg-8 mx-auto">
-            <p class="font-weight-bold mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</p>
-            <input type="text" name="FirstName">
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-          </div>
+              </div>
+            </section>
 
 
 {% endblock %}
+
