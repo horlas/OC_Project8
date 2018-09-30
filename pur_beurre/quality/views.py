@@ -16,15 +16,28 @@ from django_ajax.decorators import ajax
 from django.views.generic import TemplateView
 
 
-def index(request):
+def accueil(request):
    
-    return render(request, 'quality/index.html')
+    return render(request, 'quality/accueil.html')
 
-def get_query(request):
+
+def query_data(request):
     query = request.GET.get('query', None)
-    data = query_off(query)
-    # return JsonResponse(data, safe=False)
-    return render(request, 'quality/index.html', {'data' :data})
+    print(query)
+
+    if not query:
+        title = "saisissez un produit ! "
+        context = {'title': title }
+        return render(request, 'quality/accueil.html', context)
+    else:
+        data = query_off(query)
+        title = 'Votre recherche :  "{}"'. format(query)
+        context = {
+            'title': title,
+            'data' : data
+        }
+
+    return render(request, 'quality/query_data.html', context)
 
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm
@@ -64,7 +77,7 @@ class HomeView(TemplateView):
 
 
 class LogoutView(TemplateView):
-    template_name = 'quality/index.html'
+    template_name = 'quality/accueil.html'
     title = "Vous etes déconnecté"
 
     def get(self, request, **kwargs):

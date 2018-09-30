@@ -31,7 +31,8 @@ def query_off(query):
     # self.category = search_result["products"][0]['categories']
     # self.url_off = search_result["products"][0]['url']
     print("j'y suis")
-    search_result = openfoodfacts.products.search(query , page=1 , page_size=5 , sort_by='unique_scans' ,
+    #We inport the first six products to give choice to the user
+    search_result = openfoodfacts.products.search(query , page=1 , page_size=6 , sort_by='unique_scans' ,
                                                   locale='fr')
     p = search_result['products']
 
@@ -40,7 +41,7 @@ def query_off(query):
     for i in range(len(p)):
         p_name = search_result["products"][i]['product_name_fr']
         n_grade = search_result["products"][i]['nutrition_grade_fr']
-        img = search_result["products"][i]['image_small_url']
+        img = search_result["products"][i]['image_front_thumb_url']
         category = search_result["products"][i]['categories']
         #Treat just one category
         cat = category.split(',')[0]

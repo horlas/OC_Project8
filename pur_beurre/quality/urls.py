@@ -5,8 +5,10 @@ from django.urls import path
 app_name = "quality"
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('query_data/', views.get_query, name='query_data'),
+    path('', views.accueil, name='accueil'),
+
+
+    path('query_data/', views.query_data, name='query_data'),
 
 
     path('login/', views.CustomLoginView.as_view(), name='login'),
