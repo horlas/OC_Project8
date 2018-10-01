@@ -30,14 +30,31 @@ def query_data(request):
         context = {'title': title }
         return render(request, 'quality/accueil.html', context)
     else:
+        #query_off function calls OFF API and return 5 products
         data = query_off(query)
-        title = 'Votre recherche :  "{}"'. format(query)
+        title = 'Votre recherche est :  "{}"'. format(query)
         context = {
             'title': title,
             'data' : data
         }
 
     return render(request, 'quality/query_data.html', context)
+
+def sub_product(request):
+    # get the user choice from the checkbox
+    choice = request.GET.get('subscribe', None)
+
+    #split the return of checkbox in order to make a python list
+    choice = choice.split(', ')
+
+    #record selected product in session
+    record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore']
+
+    for value , num in zip(record_session , range(len(choice))):
+        request.session[value] = choice[num]
+
+    return render(request, 'quality/sub_product.html')
+
 
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm

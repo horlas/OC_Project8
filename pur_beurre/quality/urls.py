@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('query_data/', views.query_data, name='query_data'),
 
+    path('sub_product/', views.sub_product, name = 'sub_product'),
+
 
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('signup/', views.SignUpView.as_view(), name='signup'),

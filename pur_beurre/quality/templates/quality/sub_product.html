@@ -1,0 +1,28 @@
+{% extends 'quality/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="masthead text-center text-white d-flex">
+   <div class="container my-auto">
+   <div class="row">
+      <div class="col-lg-10 mx-auto">
+
+
+          <div class="card bg-dark mb-lg-3" style="max-width: 18rem;">
+            <img class="card-img-top img-responsive" src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}">
+            <div class="card-body">
+
+               <h5 class="card-title"> Votre produit selectionné : {{request.session.selected_name}}</h5>
+               <p class="card-text "> Catégorie : {{request.session.selected_category}}</p>
+               <p class="card-text ">Nutriscore : {{request.session.selected_nutriscore}}</p>
+            </div>
+          </div>
+
+
+   </div>
+   </div>
+   </div>
+</header>
+
+{% endblock %}

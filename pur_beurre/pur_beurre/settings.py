@@ -77,6 +77,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
+#Installed Cache with Memcached engine
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
+#
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
