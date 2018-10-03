@@ -63,3 +63,22 @@ a {
     border-radius: 300px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
+
+
+.img-card {
+    height: 120px;
+    width: 90px;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.card-title {
+
+    margin: 10px;
+}
+
+.display-product {
+    margin : 300 px
+}

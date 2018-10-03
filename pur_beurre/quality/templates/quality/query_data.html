@@ -13,7 +13,16 @@
             </h1>
             <hr>
 
+          #retourne un seul produit
+
+
+
+
+
+
+
       </div>
+   </div>
    </div>
 </header>
 
@@ -21,7 +30,7 @@
    <div  class="col-lg-8 mx-auto">
        {% for dict_item in data %}
       <form action="{% url 'quality:sub_product' %}" method="GET">
-
+        <div class="card-group">
          <div class="card bg-light mb-lg-4" style="max-width: 10rem;">
             <img class="card-img-top img-responsive" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
             <div class="card-body">
@@ -35,7 +44,7 @@
 
             </div>
          </div>
-
+        </div>
       </form>
        {% endfor %}
    </div>

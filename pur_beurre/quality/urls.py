@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('sub_product/', views.sub_product, name = 'sub_product'),
 
+    path('user_choice/', views.user_choice, name = 'user_choice'),
+
 
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('signup/', views.SignUpView.as_view(), name='signup'),

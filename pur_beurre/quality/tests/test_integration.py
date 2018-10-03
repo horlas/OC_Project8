@@ -1,0 +1,3 @@
+
+#pour mock sub_query
+list = [{'product_name': 'Nutella', 'category': 'Petit-déjeuners', 'url': 'https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero', 'img': 'https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg', 'nutriscore': 'e'}, {'product_name': 'Nutella', 'category': 'Produits à tartiner', 'url': 'https://fr.openfoodfacts.org/produit/3017624047813/nutella', 'img': 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg', 'nutriscore': 'e'}]

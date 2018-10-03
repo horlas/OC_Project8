@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
-from .methods import query_off
+from .methods import query_off, query_sub
 from django_ajax.decorators import ajax
 
 
@@ -42,18 +42,41 @@ def query_data(request):
 
 def sub_product(request):
     # get the user choice from the checkbox
-    choice = request.GET.get('subscribe', None)
+    choices = request.GET.get('subscribe', None)
 
-    #split the return of checkbox in order to make a python list
-    choice = choice.split(', ')
+    #split the checkbox's return in order to make a python list
+    choices = choices.split(', ')
 
     #record selected product in session
     record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore']
+    for value , choice in zip(record_session , choices):
+        request.session[value] = choice
 
-    for value , num in zip(record_session , range(len(choice))):
-        request.session[value] = choice[num]
+    cat = request.session['selected_category']
+    print(cat)
 
-    return render(request, 'quality/sub_product.html')
+    #request to OpenFoodFact and return six best products with the same category
+    data = query_sub(cat)
+    title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
+    context = {
+        'title': title ,
+        'data': data
+    }
+    return render(request, 'quality/sub_product.html', context)
+
+def user_choice(request):
+    # get the user choice from the checkbox
+    choices = request.GET.get('subscribe' , None)
+
+    # split the checkbox's return in order to make a python list
+    choices = choices.split(', ')
+
+    #record selected product in session
+    record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore']
+    for value , choice in zip(record_session , choices):
+        request.session[value] = choice
+    return render(request, 'quality/user_choice.html')
+
 
 
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
