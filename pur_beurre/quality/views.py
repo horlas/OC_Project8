@@ -48,7 +48,7 @@ def sub_product(request):
     choices = choices.split(', ')
 
     #record selected product in session
-    record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore']
+    record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
     for value , choice in zip(record_session , choices):
         request.session[value] = choice
 
@@ -72,7 +72,7 @@ def user_choice(request):
     choices = choices.split(', ')
 
     #record selected product in session
-    record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore']
+    record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
     for value , choice in zip(record_session , choices):
         request.session[value] = choice
     return render(request, 'quality/user_choice.html')
