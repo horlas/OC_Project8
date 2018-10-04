@@ -19,42 +19,7 @@ def data_process(products):
 
     return list
 
-    #
-    #
-    #
-    # for i in range(len(p)):
-    #     try:
-    #         p_name = result["products"][i]['product_name_fr']
-    #     except KeyError:
-    #         p_name = result["products"][i]['product_name']
-    #
-    #     #some products have no nutriscore
-    #     try:
-    #
-    #         n_grade = result["products"][i]['nutrition_grades'].upper()
-    #     except KeyError:
-    #         n_grade = 'null'
-    #
-    #     img = result["products"][i]['image_front_thumb_url']
-    #     category = result["products"][i]['categories']
-    #
-    #
-    #     cat = category.split(',')[-1]
-    #     url_off = result["products"][i]['url']
-    #
-    #     dict = {
-    #         'product_name' : p_name,
-    #         'nutriscore' : n_grade,
-    #         'img' : img,
-    #         'category' : cat,
-    #         'url' : url_off
-    #     }
-    #     list.append(dict)
-    #     #we remove item with no n_grade
-    #     for dict_items in list:
-    #         if dict_items['nutriscore'] == 'null':
-    #             list.remove(dict_items)
-    # return list
+
 
 def query_off(query):
     '''inport the first six products from Openfoodfacts to give choice to the user'''
@@ -98,26 +63,14 @@ def request_off(cat, ns):
 def best_substitute(cat):
     '''create a list of the top six substitute products'''
     ns_list = ["A", "B" , "C" , "D" , "E"]
-
-    # while len(res) < 6:
-    for ns in ns_list:
-        #res est une liste de deux dictionnaires
-        res = request_off(cat, ns)
-
-
-        # products_treaty = data_process(products)
-
-    print(res, len(res), type(res))
-
-    # #
-    # # #sort the list with n_grade id
-    # # for ns in ns_list:
-    # #     for dict_items in list:
-    # #          if dict_items['nutriscore'] == ns:
-    # #             response.append(dict_items)
-    #
-    # # return only the six first item to the front
-    # return response[:6]
+    list = []
+    while len(list) < 2:
+        for ns in ns_list:
+            #res est une liste de deux dictionnaires
+            res = request_off(cat, ns)
+            for dict in res:
+                list.append(dict)
+    return data_process(list)
 
 
 

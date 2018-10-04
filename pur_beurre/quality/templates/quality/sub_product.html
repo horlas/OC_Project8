@@ -3,49 +3,51 @@
 
 {% block content %}
 
-<header class="masthead text-center text-white d-flex">
+
+
+<header class="masthead text-center  d-flex">
    <div class="container my-auto">
-   <div class="row">
-      <div class="col-lg-10 mx-auto">
-
-
-          <div class="card bg-dark mb-lg-3" style="max-width: 18rem;">
-            <img class="card-img-top img-responsive" src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}">
-            <div class="card-body">
-
-               <h5 class="card-title"> Votre produit selectionné : {{request.session.selected_name}}</h5>
-               <p class="card-text "> Catégorie : {{request.session.selected_category}}</p>
-               <p class="card-text ">Nutriscore : {{request.session.selected_nutriscore}}</p>
-            </div>
-          </div>
-
-
-   </div>
-   </div>
-   </div>
-</header>
-
-<section class="bg-contact" >
-   <div  class="col-lg-8 mx-auto">
-       {% for dict_item in data %}
-      <form action="{% url 'quality:user_choice' %}" method="GET">
-
-         <div class="card bg-light mb-lg-4" style="max-width: 10rem;">
-            <img class="card-img-top img-responsive" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
-            <div class="card-body">
-               <h5 class="card-title">{{dict_item.product_name}}</h5>
-               <p class="card-text ">Catégorie : {{dict_item.category}}</p>
-               <p class="card-text ">Nutriscore : {{dict_item.nutriscore}}</p>
-            </div>
-            <input type="checkbox" name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}">
-            <div>
-                <button type="submit" class="btn btn-primary">Selectionner votre produit de remplacement</button>
-
+      <div class="row">
+         <div class="col-lg-3 mx-auto">
+            <div class="card-deck ">
+               <div class="card " >
+                  <!-- set a width on the image otherwise it will expand to full width       -->
+                  <img class="card-img-top img-card " src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}" >
+                  <div class="card-body">
+                     <h5 class="card-title">Votre produit selectionné </h5>
+                     <ul class = "list-group list-group-flush">
+                        <li class="list-group-item">Nom : {{request.session.selected_name}}</li>
+                        <li class="list-group-item">Catégorie : {{request.session.selected_category}}</li>
+                        <li class="list-group-item">Nutriscore : {{request.session.selected_nutriscore}}</li>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </div>
-
-      </form>
-       {% endfor %}
+      </div>
+   </div>
+</header>
+<section class="bg-contact d-flex" >
+   <div  class="container my-auto">
+      <div class="card-deck ">
+         {% for dict_item in data %}
+         <form action="{% url 'quality:user_choice' %}" method="GET">
+            <div class="card " >
+               <img class="card-img-top img-card" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
+               <div class="card-body">
+                  <h5 class="card-title">{{dict_item.product_name}}</h5>
+                  <ul class = "list-group list-group-flush">
+                  <li  class="list-group-item">Catégorie : {{dict_item.category}}</li>
+                  <li class="list-group-item">Nutriscore : {{dict_item.nutriscore}}</li>
+                  <li class="list-group-item">
+                     <input type="checkbox" name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}">
+                     <button type="submit" class="btn btn-primary">Selectionner </button>
+                  </li>
+               </div>
+            </div>
+         </form>
+         {% endfor %}
+      </div>
    </div>
 </section>
 

@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
-from .methods import query_off, query_sub
+from .methods import query_off, best_substitute
 from django_ajax.decorators import ajax
 
 
@@ -56,7 +56,7 @@ def sub_product(request):
     print(cat)
 
     #request to OpenFoodFact and return six best products with the same category
-    data = query_sub(cat)
+    data = best_substitute(cat)
     title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
     context = {
         'title': title ,
