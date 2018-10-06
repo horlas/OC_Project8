@@ -8,3 +8,5 @@ pur_beurre/quality/__pycache__/
 
 **/__pycache__/
 
+.coverage
+.coverage.*

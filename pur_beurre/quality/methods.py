@@ -6,15 +6,25 @@ def data_process(products):
     we extract the first product'''
     list = []
     for i in range(6):
-        dict = {
-            'product_name' : products[i]['product_name_fr'],
-            'nutriscore' : products[i]['nutrition_grades'].upper(),
-            'img' : products[i]['image_front_thumb_url'],
-            # keep the last category the most significant
-            'category' : products[i]['categories'].split(',')[-1],
-            'url' : products[i]['url'],
-        }
-
+        try:
+            dict = {
+                'product_name' : products[i]['product_name'],
+                'nutriscore' : products[i]['nutrition_grades'].upper(),
+                'img' : products[i]['image_thumb_url'],
+                # keep the last category the most significant
+                'category' : products[i]['categories'].split(',')[-1],
+                'url' : products[i]['url'],
+            }
+        # some products in OFF database have no image, we get image_igredients
+        except KeyError:
+            dict = {
+                'product_name' : products[i]['product_name'],
+                'nutriscore' : products[i]['nutrition_grades'].upper(),
+                'img' : products[i]['image_ingredients_small_url'],
+                # keep the last category the most significant
+                'category' : products[i]['categories'].split(',')[-1],
+                'url' : products[i]['url'],
+            }
         list.append(dict)
 
     return list

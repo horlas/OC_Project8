@@ -9,6 +9,7 @@ from django.views import generic
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
 from .methods import query_off, best_substitute
+from .models import SelectedProduct, SubstitutProduct, Backup
 from django_ajax.decorators import ajax
 
 
@@ -18,7 +19,7 @@ from django.views.generic import TemplateView
 
 def accueil(request):
    
-    return render(request, 'quality/accueil.html')
+    return render(request, 'quality/index.html')
 
 
 def query_data(request):
@@ -28,9 +29,9 @@ def query_data(request):
     if not query:
         title = "saisissez un produit ! "
         context = {'title': title }
-        return render(request, 'quality/accueil.html', context)
+        return render(request, 'quality/index.html', context)
     else:
-        #query_off function calls OFF API and return 5 products
+        #query_off function calls OFF API and return 6 products
         data = query_off(query)
         title = 'Votre recherche est :  "{}"'. format(query)
         context = {
@@ -71,6 +72,34 @@ def user_choice(request):
     # split the checkbox's return in order to make a python list
     choices = choices.split(', ')
 
+    #record selected product in database
+    p_selected = SelectedProduct.objects.create(
+        name = request.session['selected_name'],
+        url = request.session['selected_url'],
+        img = request.session['selected_img'],
+        n_grade = request.session['selected_nutriscore'],
+        category = request.session['selected_category'])
+
+    #record the backup with selected_product_id and user_id
+    backup = Backup.objects.create(
+        user_id = request.user,
+        selected_product_id = p_selected
+    )
+
+    #record the substitute product with all the foreign key
+    p_substitut = SubstitutProduct.objects.create(
+        name = choices[0],
+        category = choices[1],
+        img = choices[2],
+        n_grade = choices[3],
+        url = choices[4],
+
+        backup_id = backup,
+        user_id = request.user,
+        selected_product_id = p_selected
+    )
+
+
     #record selected product in session
     record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
     for value , choice in zip(record_session , choices):
@@ -85,7 +114,7 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     success_message = 'Vous etes à présent connecté'
 
     def get_success_url(self):
-        return reverse_lazy('quality:home')
+        return reverse_lazy('quality:accueil')
 
 
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
@@ -117,7 +146,7 @@ class HomeView(TemplateView):
 
 
 class LogoutView(TemplateView):
-    template_name = 'quality/accueil.html'
+    template_name = 'quality/index.html'
     title = "Vous etes déconnecté"
 
     def get(self, request, **kwargs):

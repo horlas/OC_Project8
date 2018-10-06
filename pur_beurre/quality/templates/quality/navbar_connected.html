@@ -1,0 +1,13 @@
+{% block nav-style %}
+             <li class="nav-item">
+                 <a class="nav-link">Bonjour {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Mon compte</a>
+            </li>
+
+            <!--Deconnexion-->
+            <li class="nav-item">
+               <a href="{% url 'quality:logout' %}"> <button class="btn btn-primary" type="button" name="button" >Se déconnecter</button></a>
+            </li>
+{% endblock %}

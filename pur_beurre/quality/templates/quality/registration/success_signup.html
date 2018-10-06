@@ -3,18 +3,17 @@
 
 {% block content %}
 
+<header class="masthead text-center d-flex">
+   <div class="container my-auto">
+      <div class="row">
+         <div class="col-lg-8 mx-auto text-center  ">
 
-
-    <section class="mes-account col-lg-8 mx-auto"" >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center  ">
-            <h3 class="text-account ">{{view.success_message}}</h3>
-               <hr class="light my-4">
+             <h2 class="text-account ">{{view.success_message}}</h2>
+              <hr class="light my-4">
             <a class="login-btn btn-account btn-light ">Connectez-vous!</a>
-          </div>
-        </div>
+         </div>
       </div>
-    </section>
+   </div>
+</header>
 
 {% endblock %}

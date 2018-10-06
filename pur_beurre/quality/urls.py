@@ -5,6 +5,7 @@ from django.urls import path
 app_name = "quality"
 
 urlpatterns = [
+
     path('', views.accueil, name='accueil'),
 
 

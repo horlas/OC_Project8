@@ -48,6 +48,8 @@
 
 
              {% if user.is_authenticated %}
+              {% include "quality/navbar_connected.html" %}
+
              {% block nav-style %}{% endblock %}
              {% else %}
 

@@ -1,12 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-@admin.register(CustonUserModel)
-class CustomUserAdmin(admin.ModelAdmin):
-    search_fields = ['username', "email", "password"]
-    readonly_fields = ['created_at']
-
-
 
 @admin.register(Backup)
 class BackupAdmin(admin.ModelAdmin):
