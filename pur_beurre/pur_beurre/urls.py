@@ -19,9 +19,10 @@ from django.contrib import admin
 from quality import views
 
 urlpatterns = [
-    path('', views.accueil, name='accueil'),
-    path('quality/', include('quality.urls')),
     path('admin/', admin.site.urls),
+    path('', views.accueil),
+    path('quality/', include('quality.urls', namespace='quality')),
+
 
 ]
 

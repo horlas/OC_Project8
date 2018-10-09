@@ -1,10 +1,18 @@
 venv/
 .idea/
 source.txt
-pur_beurre/quality/__pycache__/
+
 migrations/
+<<<<<<< HEAD
 __pycache__/*
 __pycache__
 
+=======
+__pycache__/
+pur_beurre/quality/__pycache__/
+>>>>>>> database
 
+**/__pycache__/
 
+.coverage
+.coverage.*

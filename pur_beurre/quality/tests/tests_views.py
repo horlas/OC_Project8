@@ -9,7 +9,7 @@ class IndexPageTestCase(TestCase):
     #test that index page returns a 200 code
 
     def test_index_page(self):
-        response = self.client.get(reverse('quality:index'))
+        response = self.client.get(reverse('quality:accueil'))
         self.assertEqual(response.status_code, 200)
 
 
@@ -42,7 +42,7 @@ class SucessSignupPageTestCase(TestCase):
 
 class LogoutPageTestCase(TestCase):
     #test that logout page returns a 200 code
-    #here page when an user logged out is accueil.html
+    #here page when an user logged out is index.html
     def test_logout_page(self):
         response = self.client.get(reverse('quality:index'))
         self.assertEqual(response.status_code, 200)

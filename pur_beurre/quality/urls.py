@@ -5,7 +5,11 @@ from django.urls import path
 app_name = "quality"
 
 urlpatterns = [
+
     path('', views.accueil, name='accueil'),
+
+    path('my_account/', views.myaccount, name ='myaccount'),
+    path('food/', views.food, name='food'),
 
 
     path('query_data/', views.query_data, name='query_data'),
