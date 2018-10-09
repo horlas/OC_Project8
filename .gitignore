@@ -2,16 +2,11 @@ venv/
 .idea/
 source.txt
 
-pur_beurre/quality/migrations/
+quality/migrations/
 
 
 __pycache__/
 pur_beurre/__pycache__/
-pur_beurre/quality/__pycache__/
+quality/__pycache__/
 
-
-
-**/__pycache__/
-
-.coverage
-.coverage.*
+pur_beurre/.coverage
