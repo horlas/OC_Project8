@@ -1,0 +1,23 @@
+
+{% extends 'quality/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="masthead text-center d-flex">
+   <div class="container my-auto">
+      <div class="row">
+         <div class="col-lg-12 mx-auto pt-3 custom-color">
+            <h5 class="text-uppercase">Bonjour ! </h5>
+             <hr>
+            <h4>Votre nom d'utilisateur : <strong>{{user.username}}</strong> </h4>
+             <hr>
+             <h4 > Votre mail : <strong>{{user.email}}</strong> </h4>
+
+            <hr>
+         </div>
+      </div>
+   </div>
+</header>
+
+{% endblock %}

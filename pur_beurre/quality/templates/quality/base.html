@@ -47,6 +47,16 @@
           <ul class="navbar-nav ml-auto">
 
 
+
+
+            <li class="nav-item">
+                <!--formulaire de recherche-->
+                <form class="nav-link" action="{% url 'quality:query_data' %}" method="get" accept-charset="utf-8">
+               <input type="text" name="query" id ="query">
+               <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Chercher">
+                </form>
+            </li>
+
              {% if user.is_authenticated %}
               {% include "quality/navbar_connected.html" %}
 
@@ -54,13 +64,7 @@
              {% else %}
 
 
-            <li class="nav-item">
-                <!--formulaire de recherche-->
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </li>
+
 
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">Présentations</a>
@@ -75,13 +79,15 @@
 
             <!--Trigger element for Sign-up modal-->
             <li class="nav-item">
-                <button class="signup-btn btn btn-primary" type="button" name="button1">Créer un compte</button>
+                <i class="nav-link signup-btn fas fa-user-plus fa-2x mb-3" data-toggle="tooltip" title="Creer un compte" ></i>
             </li>
 
-            <!--Trigger element for Log-in modal-->
-            <li class="nav-item">
-                <button class="login-btn btn btn-primary" type="button" name="button">Se connecter</button>
+            <!--Connexion Trigger element for Login modal-->
+            <li class= "nav-item">
+                <i class="nav-link login-btn fas fa-sign-in-alt fa-2x mb-3" data-toggle="tooltip" title="Connexion" ></i>
             </li>
+
+
             {% endif %}
 
 
@@ -156,8 +162,7 @@
         </div>
       </div>
     </section>
-     <!--&lt;!&ndash;Load Js for ajax &ndash;&gt;-->
-    <!--<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>-->
+
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'quality/vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'quality/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -191,6 +196,15 @@
         $(".signup-btn").modalForm({formURL: "{% url 'quality:signup' %}"});
         });
     </script>
+
+
+
+
+        <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
 
   {% block javascript %}{% endblock %}
   </body>

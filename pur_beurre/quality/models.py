@@ -45,8 +45,7 @@ class SubstitutProduct(models.Model):
     n_grade = models.CharField(max_length=1)
     category = models.CharField(max_length=150)
     backup_id = models.ForeignKey(Backup , on_delete=models.CASCADE)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-    )
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     selected_product_id = models.ForeignKey(SelectedProduct, on_delete=models.CASCADE)
 
 

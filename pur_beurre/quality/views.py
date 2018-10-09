@@ -10,6 +10,8 @@ from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
 from .methods import query_off, best_substitute
 from .models import SelectedProduct, SubstitutProduct, Backup
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django_ajax.decorators import ajax
 
 
@@ -20,6 +22,54 @@ from django.views.generic import TemplateView
 def accueil(request):
    
     return render(request, 'quality/index.html')
+
+@login_required
+def myaccount(request):
+    return render(request, 'quality/account.html')
+
+
+
+@login_required
+def food(request):
+    #define the connected user
+    user = request.user
+
+    backup_list = Backup.objects.filter(user_id = user.id)
+
+    #requete inner join sur selectedproduct/Backup/substituProduct
+    #p_list = SelectedProduct.objects.filter(backup__user_id= user.id , substitutproduct__selected_product_id=18)
+    sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id , substitutproduct__user_id=user.id)
+    sub_product_list = SubstitutProduct.objects.filter(user_id = user.id)
+    # Slice pages
+    paginator0 = Paginator(sel_product_list, 1)
+    paginator1 = Paginator(sub_product_list, 1)
+    #Get current page
+    page = request.GET.get('page')
+    try:
+        #return only the first product and not the others
+        sel_products = paginator0.get_page(page)
+        sub_products = paginator1.get_page(page)
+        print("YOOOOO", sub_products)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        sel_products = paginator0.page(1)
+        sub_products = paginator1.page(1)
+    except EmptyPage:
+        #If page out of range (e.g 99999), deliver last page of results.
+        sel_products = paginator0.page(paginator0.num_pages)
+        sub_products = paginator1.page(paginator1.num_pages)
+
+
+
+
+
+
+    context = {
+        'sel_products' : sel_products,
+        'sub_products': sub_products
+    }
+
+    return render(request, 'quality/food.html', context)
 
 
 def query_data(request):
