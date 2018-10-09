@@ -2,15 +2,14 @@ venv/
 .idea/
 source.txt
 
-migrations/
-<<<<<<< HEAD
-__pycache__/*
-__pycache__
+pur_beurre/quality/migrations/
+pur_beurre/quality/
 
-=======
 __pycache__/
+pur_beurre/__pycache__/
 pur_beurre/quality/__pycache__/
->>>>>>> database
+
+
 
 **/__pycache__/
 

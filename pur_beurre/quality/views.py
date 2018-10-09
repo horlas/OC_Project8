@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseRedirect
 from django.contrib.auth.views import LoginView, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -58,12 +58,6 @@ def food(request):
         #If page out of range (e.g 99999), deliver last page of results.
         sel_products = paginator0.page(paginator0.num_pages)
         sub_products = paginator1.page(paginator1.num_pages)
-
-
-
-
-
-
     context = {
         'sel_products' : sel_products,
         'sub_products': sub_products
@@ -104,7 +98,7 @@ def sub_product(request):
         request.session[value] = choice
 
     cat = request.session['selected_category']
-    print(cat)
+
 
     #request to OpenFoodFact and return six best products with the same category
     data = best_substitute(cat)
@@ -158,13 +152,27 @@ def user_choice(request):
 
 
 
+
+# Authentication views
+
+
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'quality/registration/login.html'
     success_message = 'Vous etes à présent connecté'
 
-    def get_success_url(self):
-        return reverse_lazy('quality:accueil')
+
+
+    #
+    # def get_success_url(self):
+    #     return reverse_lazy('quality:accueil')
+
+    # def get_success_url(self):
+    #     url = "{}".format(self.request.META.get('HTTP_REFERER'))
+    #     return reverse_lazy(url)
+
+    # def post(self, request, *args, **kwargs):
+    #     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
@@ -181,9 +189,19 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     def get_success_url(self):
         return reverse_lazy('quality:success_signup')
 
+class LogSignView(CustomLoginView,CustomAuthenticationForm):
+
+    form_class1 = CustomAuthenticationForm
+    # form_class2 = CustomUserCreationForm
+    template_name = 'quality/registration/login_signin.html'
+
+    #
+    # def get_success_url(self):
+    #     return reverse_lazy('quality:accueil')
+
+
 
 class SuccessSignup(SignUpView):
-
     template_name = 'quality/registration/success_signup.html'
 
     def get_context_data(self , **kwargs):

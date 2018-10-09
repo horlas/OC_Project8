@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f8=%=d6n6_h_ry!3oo)gjnm+rl5x2b1n)we&kq&cel_edwt!mf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('ENV') == 'PRODUCTION':
 
-ALLOWED_HOSTS = []
+    DEBUG = False
+
+else:
+
+    DEBUG = True
+
+ALLOWED_HOSTS = ['127.0.0.1', 'quality.herokuapp.com']
 
 
 # Application definition
@@ -54,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
@@ -140,3 +148,32 @@ LOGOUT_REDIRECT_URL = ''
 # '--cover-erase',
 # '--cover-package=quality',
 # ]
+
+if os.environ.get('ENV') == 'PRODUCTION':
+
+
+    # Simplified static file serving.
+
+    # https://warehouse.python.org/project/whitenoise/
+
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+    # Static files settings
+
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+
+    # Extra places for collectstatic to find static files.
+
+    STATICFILES_DIRS = (
+
+        os.path.join(PROJECT_ROOT, 'static'),
+
+    )
+
+    db_from_env = dj_database_url.config(conn_max_age=500)
+
+    DATABASES['default'].update(db_from_env)
