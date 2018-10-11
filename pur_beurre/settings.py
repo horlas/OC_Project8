@@ -138,42 +138,31 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+ # Static files settings
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Extra places for collectstatic to find static files.
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR , 'static')]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 INTERNAL_IPS = '127.0.0.1'
 
 LOGOUT_REDIRECT_URL = ''
 
-# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-#
-# NOSE_ARGS = [
-# '--cover-erase',
-# '--cover-package=quality',
-# ]
-
-if os.environ.get('ENV') == 'PRODUCTION':
-
-
-    # Simplified static file serving.
-
-    # https://warehouse.python.org/project/whitenoise/
-
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-    # Static files settings
-
-    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-
-    # Extra places for collectstatic to find static files.
-
-    STATICFILES_DIRS = (
-
-        os.path.join(PROJECT_ROOT, 'static'),
-
-    )
-
-    db_from_env = dj_database_url.config(conn_max_age=500)
-
-    DATABASES['default'].update(db_from_env)
