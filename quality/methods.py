@@ -1,4 +1,4 @@
-import openfoodfacts
+
 import requests
 
 def data_process(products):

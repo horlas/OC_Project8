@@ -1,15 +1,15 @@
 venv/
 .idea/
 source.txt
+.coverage
 
+
+quality/__pycache__/
 quality/migrations/
-
-
 __pycache__/
 pur_beurre/__pycache__/
-quality/__pycache__/
 
-pur_beurre/.coverage
 staticfiles/
-.coverage
+
 arbo.txt
+test.txt
