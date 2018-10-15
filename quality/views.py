@@ -12,6 +12,7 @@ from .methods import query_off, best_substitute
 from .models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth import authenticate, login
 from django_ajax.decorators import ajax
 
 
@@ -20,7 +21,6 @@ from django.views.generic import TemplateView
 
 
 def accueil(request):
-   
     return render(request, 'quality/index.html')
 
 @login_required
@@ -34,16 +34,16 @@ def food(request):
     #define the connected user
     user = request.user
 
-    backup_list = Backup.objects.filter(user_id = user.id)
+    # backup_list = Backup.objects.filter(user_id = user.id)
 
-    #requete inner join sur selectedproduct/Backup/substituProduct
-    #p_list = SelectedProduct.objects.filter(backup__user_id= user.id , substitutproduct__selected_product_id=18)
+    # request inner join on selectedproduct/Backup/substituProduct
+
     sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id , substitutproduct__user_id=user.id)
     sub_product_list = SubstitutProduct.objects.filter(user_id = user.id)
     # Slice pages
     paginator0 = Paginator(sel_product_list, 1)
     paginator1 = Paginator(sub_product_list, 1)
-    #Get current page
+    # Get current page
     page = request.GET.get('page')
     try:
         #return only the first product and not the others
@@ -59,7 +59,7 @@ def food(request):
         sel_products = paginator0.page(paginator0.num_pages)
         sub_products = paginator1.page(paginator1.num_pages)
     context = {
-        'sel_products' : sel_products,
+        'sel_products': sel_products,
         'sub_products': sub_products
     }
 
@@ -116,7 +116,7 @@ def user_choice(request):
     # split the checkbox's return in order to make a python list
     choices = choices.split(', ')
 
-    #record selected product in database
+    # record selected product in database
     p_selected = SelectedProduct.objects.create(
         name = request.session['selected_name'],
         url = request.session['selected_url'],
@@ -124,13 +124,13 @@ def user_choice(request):
         n_grade = request.session['selected_nutriscore'],
         category = request.session['selected_category'])
 
-    #record the backup with selected_product_id and user_id
+    # record the backup with selected_product_id and user_id
     backup = Backup.objects.create(
         user_id = request.user,
         selected_product_id = p_selected
     )
 
-    #record the substitute product with all the foreign key
+    # record the substitute product with all the foreign key
     p_substitut = SubstitutProduct.objects.create(
         name = choices[0],
         category = choices[1],
@@ -144,7 +144,7 @@ def user_choice(request):
     )
 
 
-    #record selected product in session
+    # record selected product in session
     record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
     for value , choice in zip(record_session , choices):
         request.session[value] = choice
@@ -153,7 +153,7 @@ def user_choice(request):
 
 
 
-# Authentication views
+# Authentification views
 
 
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
@@ -162,32 +162,47 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     success_message = 'Vous etes à présent connecté'
 
 
+class LogoutView(TemplateView):
+    template_name = 'quality/index.html'
+    title = "Vous etes déconnecté"
 
-    #
-    # def get_success_url(self):
-    #     return reverse_lazy('quality:accueil')
+    def get(self, request, **kwargs):
+        logout(request)
+        context = super().get_context_data(**kwargs)
+        return render(request, self.template_name,  context)
 
-    # def get_success_url(self):
-    #     url = "{}".format(self.request.META.get('HTTP_REFERER'))
-    #     return reverse_lazy(url)
-
-    # def post(self, request, *args, **kwargs):
-    #     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'quality/registration/signup.html'
-    success_message = 'Création de compte réussie !'
+    success_message = 'Création de compte réussie ! Vous etes à présent connecté'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
 
-
     def get_success_url(self):
+        username = self.request.POST['username']
+        password = self.request.POST['password1']
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
         return reverse_lazy('quality:success_signup')
+
+class SuccessSignup(SignUpView):
+    template_name = 'quality/registration/success_signup.html'
+
+    def get_context_data(self , **kwargs):
+        context = super(SignUpView , self).get_context_data(**kwargs)
+        return context
+
+
+
+
+
+
 
 class LogSignView(CustomLoginView,CustomAuthenticationForm):
 
@@ -201,25 +216,13 @@ class LogSignView(CustomLoginView,CustomAuthenticationForm):
 
 
 
-class SuccessSignup(SignUpView):
-    template_name = 'quality/registration/success_signup.html'
 
-    def get_context_data(self , **kwargs):
-        context = super(SignUpView , self).get_context_data(**kwargs)
-        return context
 
 
 class HomeView(TemplateView):
     template_name = "quality/home.html"
 
 
-class LogoutView(TemplateView):
-    template_name = 'quality/index.html'
-    title = "Vous etes déconnecté"
-
-    def get(self, request, **kwargs):
-        logout(request)
-        return render(request, self.template_name)
 
 
 

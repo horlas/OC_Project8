@@ -8,7 +8,7 @@ result = {'count': 147, 'page': 1, 'products': [{'ingredients_text_with_allergen
 
 #test response 200 API
 
-test result avec nock
+#test result avec nock
 
 
 

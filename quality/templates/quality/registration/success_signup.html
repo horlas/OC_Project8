@@ -2,15 +2,17 @@
 
 
 {% block content %}
+{% csrf_token %}
 
-<header class="masthead text-center d-flex">
+<header class="masthead text-center text-white d-flex">
    <div class="container my-auto">
       <div class="row">
          <div class="col-lg-8 mx-auto text-center  ">
 
              <h2 class="text-account "><strong>{{view.success_message}}</strong></h2>
               <hr class="light my-4">
-            <a class="login-btn btn-account btn-light ">Connectez-vous!</a>
+
+            {% include 'quality/search_product.html' %}
          </div>
       </div>
    </div>

@@ -19,6 +19,7 @@
             <h4 class="custom_title">  Vous pouvez remplacer cet aliment par :  </h4>
             <hr>
             {% for sub_product in sub_products %}
+            <div class="d-inline-flex justify-content-around align-items-center">
             <div class="card" style="width: 18rem;">
                <img class="card-img-top img-card" src="{{sub_product.img}}" alt="{{sub_product.name}}">
                <div class="card-body">
@@ -29,6 +30,7 @@
                      <li class="list-group-item"><a target="_blank" href="{{sub_product.url}}">Fiche produit </a></li>
                   </ul>
                </div>
+            </div>
             </div>
             {% endfor %}
             <div>
