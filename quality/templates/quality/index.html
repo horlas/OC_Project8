@@ -9,9 +9,16 @@
    <div class="row">
       <div class="col-lg-10 mx-auto">
 
-          <p >{{title}}</p>
+            {% if messages %}
+               {% for message in messages %}
+                <p class ='custom_title'>{{ message }}</p>
+                {% endfor %}
 
-         <h1 class="text-uppercase">
+            {% endif %}
+
+           <p class="custom_title">{{view.success_message}}</p>
+
+          <h1 class="text-uppercase">
             <strong>Du gras, oui, mais de la qualité!</strong>
          </h1>
         {% include 'quality/search_product.html' %}
@@ -19,13 +26,6 @@
       </div>
    </div>
 </header>
-
-
-
-
-
-
-
 
 
 

@@ -1,0 +1,23 @@
+{% extends 'quality/base.html' %}
+{% load static %}
+
+{% block content %}
+    {% csrf_token %}
+
+<header class="masthead text-center text-white d-flex">
+   <div class="container my-auto">
+   <div class="row">
+      <div class="col-lg-10 mx-auto p-3 custom-color ">
+
+         <h1 class="custom_title">
+            <strong>Désolé ! La page demandée n'a pas été trouvée ! </strong>
+         </h1>
+        {% include 'quality/search_product.html' %}
+      </div>
+   </div>
+</header>
+
+{% endblock %}
+
+
+

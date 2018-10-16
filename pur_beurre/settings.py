@@ -26,7 +26,7 @@ SECRET_KEY = 'f8=%=d6n6_h_ry!3oo)gjnm+rl5x2b1n)we&kq&cel_edwt!mf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'testserver']
 
 
 # Application definition
@@ -139,21 +139,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Extra places for collectstatic to find static files.
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR , 'static')]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 INTERNAL_IPS = '127.0.0.1'

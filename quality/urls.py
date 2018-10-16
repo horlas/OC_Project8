@@ -10,13 +10,13 @@ urlpatterns = [
 
 
     # connected views
-    path('my_account/', views.myaccount, name ='myaccount'),
+    path('my_account/', views.myaccount, name='myaccount'),
     path('food/', views.food, name='food'),
 
     # unconnected views
     path('query_data/', views.query_data, name='query_data'),
-    path('sub_product/', views.sub_product, name = 'sub_product'),
-    path('user_choice/', views.user_choice, name ='user_choice'),
+    path('sub_product/', views.sub_product, name= 'sub_product'),
+    path('user_choice/', views.user_choice, name='user_choice'),
 
     # authentification view
     path('login/', views.CustomLoginView.as_view(), name='login'),

@@ -23,6 +23,65 @@ from django.views.generic import TemplateView
 def accueil(request):
     return render(request, 'quality/index.html')
 
+def query_data(request):
+    ''' we retrieve the user input: 'query'
+     we query the OFF API : 'query_off' methods.py
+     and we display useful data '''
+
+    query = request.GET.get('query', None)
+    if not query:
+        title = "saisissez un produit ! "
+        context = {'title': title }
+        return render(request, 'quality/index.html', context)
+    else:
+        #query_off function calls OFF API and return 6 products
+        data = query_off(query)
+
+        title = 'Votre recherche est :  "{}"'. format(query)
+        context = {
+            'title': title,
+            'data' : data
+        }
+
+    return render(request, 'quality/query_data.html', context)
+
+
+def sub_product(request):
+    '''recovery of the selected product
+    recording data in the session
+    category recovery
+    interrogation of the OFF api and display of the 6 best substitute products: via best_substitute methods.py '''
+
+    # get the user choice from the checkbox
+    choices = request.GET.get('subscribe', None)
+
+
+    #split the checkbox's return in order to make a python list
+    choices = choices.split(', ')
+
+
+    #record selected product in session
+    record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
+    for value , choice in zip(record_session , choices):
+        request.session[value] = choice
+
+    cat = request.session['selected_category']
+
+
+    #request to OpenFoodFact and return six best products with the same category
+    data = best_substitute(cat)
+    title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
+    context = {
+        'title': title ,
+        'data': data
+    }
+    return render(request, 'quality/sub_product.html', context)
+
+
+
+
+
+
 @login_required
 def myaccount(request):
     return render(request, 'quality/account.html')
@@ -31,6 +90,8 @@ def myaccount(request):
 
 @login_required
 def food(request):
+    '''View which display page of Aliments . firstly we are looking for the connected user,
+    then we are looking for all backups related to this user, the display supports pagination'''
     #define the connected user
     user = request.user
 
@@ -66,48 +127,9 @@ def food(request):
     return render(request, 'quality/food.html', context)
 
 
-def query_data(request):
-    query = request.GET.get('query', None)
-    print(query)
-
-    if not query:
-        title = "saisissez un produit ! "
-        context = {'title': title }
-        return render(request, 'quality/index.html', context)
-    else:
-        #query_off function calls OFF API and return 6 products
-        data = query_off(query)
-        title = 'Votre recherche est :  "{}"'. format(query)
-        context = {
-            'title': title,
-            'data' : data
-        }
-
-    return render(request, 'quality/query_data.html', context)
-
-def sub_product(request):
-    # get the user choice from the checkbox
-    choices = request.GET.get('subscribe', None)
-
-    #split the checkbox's return in order to make a python list
-    choices = choices.split(', ')
-
-    #record selected product in session
-    record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
-    for value , choice in zip(record_session , choices):
-        request.session[value] = choice
-
-    cat = request.session['selected_category']
 
 
-    #request to OpenFoodFact and return six best products with the same category
-    data = best_substitute(cat)
-    title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
-    context = {
-        'title': title ,
-        'data': data
-    }
-    return render(request, 'quality/sub_product.html', context)
+
 
 def user_choice(request):
     # get the user choice from the checkbox
@@ -161,15 +183,23 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     template_name = 'quality/registration/login.html'
     success_message = 'Vous etes à présent connecté'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     return context
+
+    def get_success_url(self):
+        return reverse_lazy('quality:accueil')
+
+
 
 class LogoutView(TemplateView):
     template_name = 'quality/index.html'
-    title = "Vous etes déconnecté"
+    success_message = "Vous etes déconnecté"
 
     def get(self, request, **kwargs):
         logout(request)
         context = super().get_context_data(**kwargs)
-        return render(request, self.template_name,  context)
+        return render(request, self.template_name, context)
 
 
 
