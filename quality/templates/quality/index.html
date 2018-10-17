@@ -1,6 +1,17 @@
 {% extends 'quality/base.html' %}
 {% load static %}
 
+{% block nav-style %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Présentations</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+            </li>
+
+{% endblock %}
+
 {% block content %}
     {% csrf_token %}
 

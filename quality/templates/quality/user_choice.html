@@ -4,8 +4,6 @@
 {% block content %}
 
 
-
-
 <header class="masthead  d-flex" >
    <div class="container my-auto">
       <div class="row">
@@ -39,17 +37,18 @@
             </div>
          </div>
          <!-- /.card -->
+
+      </div>
+      <hr>
+      <div class="text-center custom_title"
+      {% include 'quality/search_product.html' %}
       </div>
    </div>
 </header>
 
 
-
-
        {% if user.is_authenticated %}
        {% endif %}
-
-
 
 
 {% endblock %}

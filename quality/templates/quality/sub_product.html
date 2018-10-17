@@ -10,7 +10,7 @@
       <div class="row">
          <div class="col-lg-3 mx-auto">
             <div class="card-deck ">
-               <div class="card " >
+               <div class="card mb-lg-4 p-1">
                   <!-- set a width on the image otherwise it will expand to full width       -->
                   <img class="card-img-top img-card " src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}" >
                   <div class="card-body">
@@ -31,12 +31,35 @@
 </header>
 <section id="choice" class="bg-product d-flex" >
    <div  class="container my-auto">
+
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading"> Changez vos habitudes ! <br> Sauvegardez votre recherche !</h2>
+            <hr class="my-4">
+            <p class="mb-5">Vous pourrez ainsi retrouver tous vos produits de meilleure qualité et faire évoluer vos habitudes de consommation !
+            Pour cela connectez vous ou créez un compte  ! Retrouvez toutes vos recherches dans la page aliment.</p>
+
+             <div class="d-lg-inline d-sm-flex">
+            <button class="signup-btn btn btn-primary" type="button" name="button1">Créer un compte</button>
+              <button class="login-btn btn btn-primary" type="button" name="button">Se connecter</button>
+          </div>
+             <hr class="my-4">
+          </div>
+        </div>
+
+
+
+
+
+
+
+
       <div class="card-deck ">
 
          {% if user.is_authenticated %}
                {% for dict_item in data %}
                <form action="{% url 'quality:user_choice' %}" method="GET">
-                  <div class="card ">
+                  <div class="card mb-lg-4 p-1">
                      <img class="card-img-top img-card" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
                      <div class="card-body">
                         <h5 class="card-title">{{dict_item.product_name}}</h5>
@@ -54,27 +77,27 @@
 
          {% else %}
               {% for dict_item in data %}
-
-                  <div class="card ">
+                  <form action="#" >
+                  <div class="card mb-lg-4 p-1">
                      <img class="card-img-top img-card" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
                      <div class="card-body">
                         <h5 class="card-title">{{dict_item.product_name}}</h5>
                         <ul class = "list-group list-group-flush">
                         <li  class="list-group-item">Catégorie : {{dict_item.category}}</li>
                         <li class="list-group-item">Nutriscore : {{dict_item.nutriscore}}</li>
-                        <li class="list-group-item">
-                           <button class="login-sign-btn btn btn-primary">COUCOU!</button>
-                        </li>
+                        <!--<li class="list-group-item">-->
+                           <!--<button class="login-sign-btn btn btn-primary">COUCOU!</button>-->
+                        <!--</li>-->
                         </ul>
                      </div>
                   </div>
+                  </form>
 
                {% endfor %}
          {% endif %}
 
       </div>
 
-      <p>URL of this page: {{ request.get_full_path }}</p>
    </div>
 </section>
 

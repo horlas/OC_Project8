@@ -55,10 +55,8 @@ def sub_product(request):
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
 
-
     #split the checkbox's return in order to make a python list
     choices = choices.split(', ')
-
 
     #record selected product in session
     record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
@@ -66,7 +64,6 @@ def sub_product(request):
         request.session[value] = choice
 
     cat = request.session['selected_category']
-
 
     #request to OpenFoodFact and return six best products with the same category
     data = best_substitute(cat)
@@ -77,7 +74,46 @@ def sub_product(request):
     }
     return render(request, 'quality/sub_product.html', context)
 
+@login_required
+def user_choice(request):
+    # get the user choice from the checkbox
+    choices = request.GET.get('subscribe' , None)
 
+    # split the checkbox's return in order to make a python list
+    choices = choices.split(', ')
+
+    # record selected product in database
+    p_selected = SelectedProduct.objects.create(
+        name = request.session['selected_name'],
+        url = request.session['selected_url'],
+        img = request.session['selected_img'],
+        n_grade = request.session['selected_nutriscore'],
+        category = request.session['selected_category'])
+
+    # record the backup with selected_product_id and user_id
+    backup = Backup.objects.create(
+        user_id = request.user,
+        selected_product_id = p_selected
+    )
+
+    # record the substitute product with all the foreign key
+    p_substitut = SubstitutProduct.objects.create(
+        name = choices[0],
+        category = choices[1],
+        img = choices[2],
+        n_grade = choices[3],
+        url = choices[4],
+
+        backup_id = backup,
+        user_id = request.user,
+        selected_product_id = p_selected
+    )
+
+    # record selected product in session
+    record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
+    for value , choice in zip(record_session , choices):
+        request.session[value] = choice
+    return render(request, 'quality/user_choice.html')
 
 
 
@@ -131,46 +167,7 @@ def food(request):
 
 
 
-def user_choice(request):
-    # get the user choice from the checkbox
-    choices = request.GET.get('subscribe' , None)
 
-    # split the checkbox's return in order to make a python list
-    choices = choices.split(', ')
-
-    # record selected product in database
-    p_selected = SelectedProduct.objects.create(
-        name = request.session['selected_name'],
-        url = request.session['selected_url'],
-        img = request.session['selected_img'],
-        n_grade = request.session['selected_nutriscore'],
-        category = request.session['selected_category'])
-
-    # record the backup with selected_product_id and user_id
-    backup = Backup.objects.create(
-        user_id = request.user,
-        selected_product_id = p_selected
-    )
-
-    # record the substitute product with all the foreign key
-    p_substitut = SubstitutProduct.objects.create(
-        name = choices[0],
-        category = choices[1],
-        img = choices[2],
-        n_grade = choices[3],
-        url = choices[4],
-
-        backup_id = backup,
-        user_id = request.user,
-        selected_product_id = p_selected
-    )
-
-
-    # record selected product in session
-    record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
-    for value , choice in zip(record_session , choices):
-        request.session[value] = choice
-    return render(request, 'quality/user_choice.html')
 
 
 
