@@ -6,6 +6,7 @@ from django.http import HttpRequest
 from django.test.client import Client
 from django.contrib.auth.models import User
 from quality.methods import query_off, best_substitute
+from quality.models import SelectedProduct, SubstitutProduct, Backup
 
 
 
@@ -71,17 +72,81 @@ class QueryDataTestCase(TestCase):
         self.assertEqual(len(data), 6)
 
 
-class SubProductTestCase(TestCase):
-    choices = "Nutella, Pâtes à tartiner aux noisettes et au cacao," \
-              " https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg," \
-              " E, https://fr.openfoodfacts.org/produit/3017624047813/nutella"
-    choices = choices.split(', ')
-    def test_sub_product_page_return_200(self):
-        '''test that sub product return a 200 code'''
-        response = self.client.get(reverse('quality:sub_product'))
+# class SubProductTestCase(TestCase):
+#     # choices = "Nutella, Pâtes à tartiner aux noisettes et au cacao," \
+#     #           " https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg," \
+#     #           " E, https://fr.openfoodfacts.org/produit/3017624047813/nutella"
+#     # choices = choices.split(', ')
+#     def test_sub_product_page(self):
+#         '''test that sub product return a 200 code'''
+#         response = self.client.get(reverse('quality:sub_product'))
+#         self.assertEqual(response.status_code , 302)
+
+class UserChoiceTestCase(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create(
+            'foo',
+            'myemail@test.com',
+            'pass'
+        )
+
+        self.p_selected = SelectedProduct.objects.create(
+            name='Nutella' ,
+            url='https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero' ,
+            img='https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg' ,
+            n_grade='e' ,
+            category='Produits à tartiner')
+
+        self.logged_in = self.client.login(
+            username='foo',
+            password='pass'
+        )
+
+    def test_user_choice_page(self):
+        # check new User object created
+        self.assertEqual(User.objects.count(), 1)
+        # check use is logged in
+        self.assertEqual(self.logged_in, True)  # check login success
+
+        # p_selected = SelectedProduct.objects.create(
+        #     name='Nutella',
+        #     url='https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero',
+        #     img='https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg',
+        #     n_grade='e',
+        #     category='Produits à tartiner')
+        #
+        # backup = Backup.objects.create(
+        #     user_id=,
+        #     selected_product_id=p_selected
+        # )
+
+
+
+        response = self.client.get(reverse('quality:user_choice'))
         self.assertEqual(response.status_code , 302)
 
 
+class MyAccountTestCase(TestCase):
+
+    def test_myaccount_page_return_302(self):
+            '''test that my account return a 200 code'''
+            response = self.client.get(reverse('quality:myaccount'))
+            self.assertEqual(response.status_code , 302)
+
+class FoodTestCase(TestCase):
+
+    def test_food_page_return_200(self):
+            '''test that food page return a 200 code with requested data '''
+            user = TestClient()
+            user.login_user('testclient2', '1234')
+
+            #create a selected product
+
+
+            response = self.client.get(reverse('quality:food'))
+            self.assertEqual(response.status_code , 302)
 
 
 

@@ -32,6 +32,7 @@
 <section id="choice" class="bg-product d-flex" >
    <div  class="container my-auto">
 
+        {% if user.is_anonymous %}
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading"> Changez vos habitudes ! <br> Sauvegardez votre recherche !</h2>
@@ -46,15 +47,10 @@
              <hr class="my-4">
           </div>
         </div>
+        {% endif %}
 
 
-
-
-
-
-
-
-      <div class="card-deck ">
+      <div class="card-deck justify-content-center ">
 
          {% if user.is_authenticated %}
                {% for dict_item in data %}
@@ -67,7 +63,6 @@
                         <li  class="list-group-item">Catégorie : {{dict_item.category}}</li>
                         <li class="list-group-item">Nutriscore : {{dict_item.nutriscore}}</li>
                         <li class="list-group-item">
-                           <!--<input type="checkbox" name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}">-->
                            <button type="submit" class="btn btn-primary" name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}">Sauvegarder</button>
                         </li>
                      </div>
@@ -85,9 +80,7 @@
                         <ul class = "list-group list-group-flush">
                         <li  class="list-group-item">Catégorie : {{dict_item.category}}</li>
                         <li class="list-group-item">Nutriscore : {{dict_item.nutriscore}}</li>
-                        <!--<li class="list-group-item">-->
-                           <!--<button class="login-sign-btn btn btn-primary">COUCOU!</button>-->
-                        <!--</li>-->
+
                         </ul>
                      </div>
                   </div>
@@ -106,14 +99,5 @@
 {% endblock %}
 
 {% block javascript %}
-
-    <!-- Open login/sign-in modal -->
-    <script type="text/javascript">
-         $(function () {
-         // Log in button
-         $(".login-sign-btn").modalForm({formURL: "{% url 'quality:logsign' %}"});
-         });
-    </script>
-
 
 {% endblock %}

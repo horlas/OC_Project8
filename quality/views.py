@@ -2,10 +2,12 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth.views import LoginView, logout
+from django.contrib.auth.views import LoginView
+from  django.contrib.auth import REDIRECT_FIELD_NAME, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import RedirectView
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
 from .methods import query_off, best_substitute
@@ -22,6 +24,9 @@ from django.views.generic import TemplateView
 
 def accueil(request):
     return render(request, 'quality/index.html')
+
+def credits(request):
+    return render(request, 'quality/credits.html')
 
 def query_data(request):
     ''' we retrieve the user input: 'query'
@@ -44,7 +49,6 @@ def query_data(request):
         }
 
     return render(request, 'quality/query_data.html', context)
-
 
 def sub_product(request):
     '''recovery of the selected product
@@ -109,9 +113,9 @@ def user_choice(request):
         selected_product_id = p_selected
     )
 
-    # record selected product in session
+    # record selected product in session just for display
     record_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore', 'substitut_url']
-    for value , choice in zip(record_session , choices):
+    for value , choice in zip(record_session, choices):
         request.session[value] = choice
     return render(request, 'quality/user_choice.html')
 
@@ -122,21 +126,18 @@ def user_choice(request):
 def myaccount(request):
     return render(request, 'quality/account.html')
 
-
-
 @login_required
 def food(request):
     '''View which display page of Aliments . firstly we are looking for the connected user,
     then we are looking for all backups related to this user, the display supports pagination'''
+
     #define the connected user
     user = request.user
 
-    # backup_list = Backup.objects.filter(user_id = user.id)
+    # request inner join on selectedproduct/Backup/substitutproduct
 
-    # request inner join on selectedproduct/Backup/substituProduct
-
-    sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id , substitutproduct__user_id=user.id)
-    sub_product_list = SubstitutProduct.objects.filter(user_id = user.id)
+    sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id, substitutproduct__user_id=user.id)
+    sub_product_list = SubstitutProduct.objects.filter(user_id=user.id).order_by('id')
     # Slice pages
     paginator0 = Paginator(sel_product_list, 1)
     paginator1 = Paginator(sub_product_list, 1)
@@ -146,7 +147,7 @@ def food(request):
         #return only the first product and not the others
         sel_products = paginator0.get_page(page)
         sub_products = paginator1.get_page(page)
-        print("YOOOOO", sub_products)
+
     except PageNotAnInteger:
         # If page is not an integer, deliver first page
         sel_products = paginator0.page(1)
@@ -159,16 +160,9 @@ def food(request):
         'sel_products': sel_products,
         'sub_products': sub_products
     }
+    print(context)
 
     return render(request, 'quality/food.html', context)
-
-
-
-
-
-
-
-
 
 
 
@@ -187,6 +181,21 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     def get_success_url(self):
         return reverse_lazy('quality:accueil')
 
+    # def get_success_url(self):
+    #     url = "{}".format(self.request.META.get('HTTP_REFERER', None))
+    #     print(url)
+    #     return HttpResponseRedirect(reverse_lazy(url))
+
+
+
+# class LogoutView(RedirectView):
+#     template_name = 'quality/index.html'
+#
+#     def get(self, request, *args, **kwargs):
+#         logout(request)
+#         return super(LogoutView, self.template_name).get(request, *args, **kwargs)
+
+#
 
 
 class LogoutView(TemplateView):
@@ -226,28 +235,6 @@ class SuccessSignup(SignUpView):
         return context
 
 
-
-
-
-
-
-class LogSignView(CustomLoginView,CustomAuthenticationForm):
-
-    form_class1 = CustomAuthenticationForm
-    # form_class2 = CustomUserCreationForm
-    template_name = 'quality/registration/login_signin.html'
-
-    #
-    # def get_success_url(self):
-    #     return reverse_lazy('quality:accueil')
-
-
-
-
-
-
-class HomeView(TemplateView):
-    template_name = "quality/home.html"
 
 
 

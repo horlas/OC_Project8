@@ -1,205 +1,159 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
       {% load static %}
-
-    <title>Pur Beurre </title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'quality/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href= '{% static "quality/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
-    <link href= '{% static "quality/vendor/fontawesome-free/css/brands.min.css" %}' rel="stylesheet" type="text/css">
-     <link href= '{% static "quality/vendor/fontawesome-free/webfonts/fa-brands-400.svg" %}' rel="stylesheet" type="text/css">
-
-
-     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
-
-
-    <!-- Plugin CSS -->
-    <link href='{% static "quality/vendor/magnific-popup/magnific-popup.css"%}' rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href= '{% static "quality/css/creative.min.css" %}' rel="stylesheet">
-    <link href="{% static 'quality/css/main.css' %}" rel="stylesheet">
-
-  </head>
-
-  <body id="page-top">
-
-<!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
-      <div class="container">
-        <a id='brand-name' class="navbar-brand js-scroll-trigger" href="{% url 'quality:accueil' %}"><img alt = "logo" src="{% static 'quality/img/logo_pur_beurre.png' %}" class="logo-navbar"/>Pur Beurre</a>
-          <!--display colunm menu on small device -->
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-
-
-
-
-            <li class="nav-item">
-                <!--formulaire de recherche-->
-                <form class="nav-link" action="{% url 'quality:query_data' %}" method="get" accept-charset="utf-8">
-               <input type="text" name="query" id ="query">
-               <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Chercher">
-                </form>
-            </li>
-
-            {% block nav-style %}{% endblock %}
-
-             {% if user.is_authenticated %}
-              {% include "quality/navbar_connected.html" %}
-
-             {% else %}
-
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-            </li>
-
-            <!--Trigger element for Sign-up modal-->
-            <li class="nav-item">
-                <i class="nav-link signup-btn fas fa-user-plus fa-2x mb-3" data-toggle="tooltip" title="Creer un compte" ></i>
-            </li>
-
-            <!--Connexion Trigger element for Login modal-->
-            <li class= "nav-item">
-                <i class="nav-link login-btn fas fa-sign-in-alt fa-2x mb-3" data-toggle="tooltip" title="Connexion" ></i>
-            </li>
-
-
-            {% endif %}
-
-
-            </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!--Modal markup placement login-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content"></div>
-    </div>
-    </div>
-
-
-{% block content %}{% endblock %}
-
-
-
-    <section class="bg-contact" id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading">Contactez-nous!</h2>
-            <hr class="my-4">
-            <p class="mb-5">Vous etes enthousiasmés par notre idée de Plateforme et désirez nous soutenir dans notre initiative de mieux manger pour mieux vivre ? C'est avec grand plasir que nous accueillons vos idées et vos compliments!</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 ml-auto text-center">
-            <i class="fas fa-phone fa-3x mb-3 text-icone sr-contact-1"></i>
-            <p>09-57-88-47-90</p>
-          </div>
-          <div class="col-lg-4 mr-auto text-center">
-            <i class="fas fa-envelope fa-3x mb-3 text-icone sr-contact-2"></i>
-            <p>
-              <a href="mailto:your-email@your-domain.com" style="text-decoration: none">pur-beurre@resto.com</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-<section class="bg-footer">
-
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-gem text-icone mb-3 sr-icon-1" ></i>
-                <a href ="#" class="mb-3 a-headings">Mentions légales</a>
-              <p class="text-muted mb-0">Nous citons les sources de notre inspiration.</p>
+      <title>Pur Beurre </title>
+      <!-- Bootstrap core CSS -->
+      <link href="{% static 'quality/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+      <!-- Custom fonts for this template -->
+      <link href= '{% static "quality/vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet" type="text/css">
+      <link href= '{% static "quality/vendor/fontawesome-free/css/brands.min.css" %}' rel="stylesheet" type="text/css">
+      <link href= '{% static "quality/vendor/fontawesome-free/webfonts/fa-brands-400.svg" %}' rel="stylesheet" type="text/css">
+      <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+      <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
+      <!-- Plugin CSS -->
+      <link href='{% static "quality/vendor/magnific-popup/magnific-popup.css"%}' rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link href= '{% static "quality/css/creative.min.css" %}' rel="stylesheet">
+      <link href="{% static 'quality/css/main.css' %}" rel="stylesheet">
+   </head>
+   <body id="page-top">
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
+         <div class="container">
+            <a id='brand-name' class="navbar-brand js-scroll-trigger" href="{% url 'quality:accueil' %}"><img alt = "logo" src="{% static 'quality/img/logo_pur_beurre.png' %}" class="logo-navbar"/>Pur Beurre</a>
+            <!--display colunm menu on small device -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <!--formulaire de recherche-->
+                     <form class="nav-link" action="{% url 'quality:query_data' %}" method="get" accept-charset="utf-8">
+                        <input type="text" name="query" id ="query">
+                        <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Chercher">
+                     </form>
+                  </li>
+                  {% block nav-style %}{% endblock %}
+                  {% if user.is_authenticated %}
+                  {% include "quality/navbar_connected.html" %}
+                  {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                  </li>
+                  <!--Trigger element for Sign-up modal-->
+                  <li class="nav-item">
+                     <i class="nav-link signup-btn fas fa-user-plus fa-2x mb-3" data-toggle="tooltip" title="Creer un compte" ></i>
+                  </li>
+                  <!--Connexion Trigger element for Login modal-->
+                  <li class= "nav-item">
+                     <i class="nav-link login-btn fas fa-sign-in-alt fa-2x mb-3" data-toggle="tooltip" title="Connexion" ></i>
+                  </li>
+                  {% endif %}
+               </ul>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-paper-plane text-icone mb-3 sr-icon-2"></i>
-                <a href="#contact" class="mb-3 a-headings js-scroll-trigger">Contact</a>
-              <p class="text-muted mb-0">Nous serons heureux d'échanger avec vous !</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <i class="fas fa-4x fa-gift text-icone mb-3 sr-icon-3"></i>
-                <a href="https://github.com/horlas/OC_Project8" target="_blank" class="mb-3 a-headings">Code Pur-beurre</a>
-              <p class="text-muted mb-0">Pour les développeurs, les correcteurs et les curieux !</p>
-            </div>
-          </div>
-        </div>
+         </div>
+      </nav>
+      <!--Modal markup placement login-->
+      <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+         </div>
       </div>
-    </section>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'quality/vendor/jquery/jquery.min.js'%}"></script>
-    <script src="{% static 'quality/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'quality/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
-    <script src="{% static 'quality/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
-    <script src="{% static 'quality/vendor/magnific-popup/jquery.magnific-popup.min.js'%}"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="{% static 'quality/js/creative.min.js'%}"></script>
-
-    <!--Customs script for the project -->
-    <script src="{% static 'quality/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
-
-
-
-
-    <!-- Open login modal -->
-    <script type="text/javascript">
+      {% block content %}{% endblock %}
+      <section class="bg-contact" id="contact">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 mx-auto text-center">
+                  <h2 class="section-heading">Contactez-nous!</h2>
+                  <hr class="my-4">
+                  <p class="mb-5">Vous etes enthousiasmés par notre idée de Plateforme et désirez nous soutenir dans notre initiative de mieux manger pour mieux vivre ? C'est avec grand plasir que nous accueillons vos idées et vos compliments!</p>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-4 ml-auto text-center">
+                  <i class="fas fa-phone fa-3x mb-3 text-icone sr-contact-1"></i>
+                  <p>09-57-88-47-90</p>
+               </div>
+               <div class="col-lg-4 mr-auto text-center">
+                  <i class="fas fa-envelope fa-3x mb-3 text-icone sr-contact-2"></i>
+                  <p>
+                     <a href="mailto:your-email@your-domain.com" style="text-decoration: none">pur-beurre@resto.com</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="bg-footer">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-md-6 text-center">
+                  <div class="service-box mt-5 mx-auto">
+                     <i class="fas fa-4x fa-gem text-icone mb-3 sr-icon-1" ></i>
+                     <a href ="{% url 'quality:credits' %}" class="mb-3 a-headings">Mentions légales</a>
+                     <p class="text-muted mb-0">Nous citons les sources de notre inspiration.</p>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6 text-center">
+                  <div class="service-box mt-5 mx-auto">
+                     <i class="fas fa-4x fa-paper-plane text-icone mb-3 sr-icon-2"></i>
+                     <a href="#contact" class="mb-3 a-headings js-scroll-trigger">Contact</a>
+                     <p class="text-muted mb-0">Nous serons heureux d'échanger avec vous !</p>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6 text-center">
+                  <div class="service-box mt-5 mx-auto">
+                     <i class="fas fa-4x fa-gift text-icone mb-3 sr-icon-3"></i>
+                     <a href="https://github.com/horlas/OC_Project8" target="_blank" class="mb-3 a-headings">Code Pur-beurre</a>
+                     <p class="text-muted mb-0">Pour les développeurs, les correcteurs et les curieux !</p>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12 col-md-6 text-center mt-5">
+                  <h6 class="custom_title" style="font-family:'Scope One'"><strong>Aurélia Gourbère novembre 2018 - Projet 8 Parcours python - Openclassrooms</strong></h6>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Bootstrap core JavaScript -->
+      <script src="{% static 'quality/vendor/jquery/jquery.min.js'%}"></script>
+      <script src="{% static 'quality/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <!-- Plugin JavaScript -->
+      <script src="{% static 'quality/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+      <script src="{% static 'quality/vendor/scrollreveal/scrollreveal.min.js'%}"></script>
+      <script src="{% static 'quality/vendor/magnific-popup/jquery.magnific-popup.min.js'%}"></script>
+      <!-- Custom scripts for this template -->
+      <script src="{% static 'quality/js/creative.min.js'%}"></script>
+      <!--Customs script for the project -->
+      <script src="{% static 'quality/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+      <!-- Open login modal -->
+      <script type="text/javascript">
          $(function () {
          // Log in button
          $(".login-btn").modalForm({formURL: "{% url 'quality:login' %}"});
          });
-    </script>
-
-    <!-- Open sign-up modal-->
-    <script type="text/javascript">
-        $(function () {
-        // Sign up button
-        $(".signup-btn").modalForm({formURL: "{% url 'quality:signup' %}"});
-        });
-    </script>
-
-
-
-
-        <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-        </script>
-
-  {% block javascript %}{% endblock %}
-  </body>
-
+      </script>
+      <!-- Open sign-up modal-->
+      <script type="text/javascript">
+         $(function () {
+         // Sign up button
+         $(".signup-btn").modalForm({formURL: "{% url 'quality:signup' %}"});
+         });
+      </script>
+      <script>
+         $(document).ready(function(){
+             $('[data-toggle="tooltip"]').tooltip();
+         });
+      </script>
+      {% block javascript %}{% endblock %}
+   </body>
 </html>
+

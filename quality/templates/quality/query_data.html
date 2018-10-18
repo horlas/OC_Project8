@@ -17,12 +17,12 @@
       </div>
    </div>
 </header>
-<section id="choice" class="bg-product d-flex" >
+<section id="choice" class="bg-product d-flex " >
    <div  class="container my-auto">
-      <div class="card-deck ">
+      <div class="card-deck  justify-content-center">
          {% for dict_item in data %}
          <form action="{% url 'quality:sub_product' %}" method="GET">
-            <div class="card"  >
+            <div class="card mb-lg-4 p-1">
                <img class="card-img-top img-card" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
                <div class="card-body">
                   <h5 class="card-title">{{dict_item.product_name}}</h5>
