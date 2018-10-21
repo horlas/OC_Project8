@@ -10,7 +10,7 @@ from django.views import generic
 from django.views.generic import RedirectView
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from django.http import JsonResponse
-from .methods import query_off, best_substitute
+from .methods import query_off, best_substitut
 from .models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -70,7 +70,7 @@ def sub_product(request):
     cat = request.session['selected_category']
 
     #request to OpenFoodFact and return six best products with the same category
-    data = best_substitute(cat)
+    data = best_substitut(cat)
     title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
     context = {
         'title': title ,

@@ -1,8 +1,8 @@
 from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
-from django.contrib.auth.forms import AuthenticationForm
+
 
 
 class CustomAuthenticationForm(AuthenticationForm):

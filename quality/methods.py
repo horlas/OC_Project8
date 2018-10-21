@@ -1,5 +1,14 @@
-
 import requests
+
+
+
+#test integration test
+def is_even(nbr):
+    """
+        Cette fonction teste si un nombre est pair.
+        """
+    return nbr % 2 == 0
+
 
 
 def request_off(cat, ns):
@@ -65,8 +74,8 @@ def query_off(query):
 
     return data_process(products)
 
-def best_substitute(cat):
-    '''create a list of the top six substitute products'''
+def best_substitut(cat):
+    '''create a list of the top six substitut products'''
     ns_list = ["A", "B", "C", "D", "E"]
     list = []
     for ns in ns_list:
@@ -75,11 +84,10 @@ def best_substitute(cat):
             res = request_off(cat, ns)
             for dict in res:
                 list.append(dict)
-
     return data_process(list)
-
+#
 # if __name__ == '__main__':
 #
 #     cat = 'Sauces Pesto'
-#     best_substitute(cat)
+#     best_substitut(cat)
 

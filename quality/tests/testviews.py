@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.http import HttpRequest
 from django.test.client import Client
 from django.contrib.auth.models import User
-from quality.methods import query_off, best_substitute
+from quality.methods import query_off, best_substitut
 from quality.models import SelectedProduct, SubstitutProduct, Backup
 
 
@@ -93,9 +93,9 @@ class UserChoiceTestCase(TestCase):
         )
 
         self.p_selected = SelectedProduct.objects.create(
-            name='Nutella' ,
-            url='https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero' ,
-            img='https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg' ,
+            name='Nutella',
+            url='https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero',
+            img='https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg',
             n_grade='e' ,
             category='Produits à tartiner')
 
