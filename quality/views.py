@@ -59,6 +59,7 @@ def sub_product(request):
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
 
+
     #split the checkbox's return in order to make a python list
     choices = choices.split(', ')
 
@@ -81,7 +82,7 @@ def sub_product(request):
 @login_required
 def user_choice(request):
     # get the user choice from the checkbox
-    choices = request.GET.get('subscribe' , None)
+    choices = request.GET.get('subscribe', None)
 
     # split the checkbox's return in order to make a python list
     choices = choices.split(', ')

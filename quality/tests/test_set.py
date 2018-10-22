@@ -1,3 +1,19 @@
+######## Fake datas for testing views #########
+FAKE_DATA_SELECTED_PRODUCT = ['Nutella', 'Pâtes à tartiner aux noisettes et au cacao', 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg', 'E', 'https://fr.openfoodfacts.org/produit/3017624047813/nutella']
+
+
+
+FAKE_DATA_USER_CHOICES = {
+    'subscribe' : 'Pâte à Tartiner, Pâtes à tartiner aux noisettes et au cacao, https://static.openfoodfacts.org/images/products/366/207/201/3370/front_fr.4.100.jpg, A, https://fr.openfoodfacts.org/produit/3662072013370/pate-a-tartiner-so-tasty'}
+
+FAKE_DATA_USER_CHOICES2 = 'Pâte à Tartiner, Pâtes à tartiner aux noisettes et au cacao, https://static.openfoodfacts.org/images/products/366/207/201/3370/front_f'
+
+
+
+
+
+############ Fake datas for testing methods.py#############
+
 FAKE_RETURN_BESTSUBSTITUT =[{'url': 'https://fr.openfoodfacts.org/produit/8001060014657/pesto-salsa-maestra', 'category': 'Sauces Pesto', 'product_name': 'Pesto', 'nutriscore': 'A', 'img': 'https://static.openfoodfacts.org/images/products/800/106/001/4657/front_fr.4.100.jpg'},
                             {'url': 'https://fr.openfoodfacts.org/produit/3466090484484/soupe-de-poissons-de-roche-au-bec-fin', 'category': 'Sauces Pesto', 'product_name': 'Soupe de poissons de roche', 'nutriscore': 'B', 'img': 'https://static.openfoodfacts.org/images/products/346/609/048/4484/front_fr.13.100.jpg'},
                             {'url': 'https://fr.openfoodfacts.org/produit/3564700571170/sauce-pesto-au-basilic-frais-turini', 'category': 'Sauces Pesto', 'product_name': 'Sauce Pesto au basilic frais', 'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/356/470/057/1170/front_fr.37.100.jpg'},
