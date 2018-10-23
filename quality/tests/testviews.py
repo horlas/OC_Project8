@@ -1,4 +1,4 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, SimpleTestCase
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import login
@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 from quality.views import *
 from unittest.mock import patch, MagicMock
 from quality.tests.test_set import *
-from quality.methods import query_off, best_substitut
 from quality.models import SelectedProduct, SubstitutProduct, Backup
+from django.contrib.sessions.middleware import SessionMiddleware
 
 
 
@@ -85,30 +85,35 @@ from quality.models import SelectedProduct, SubstitutProduct, Backup
 #         response = self.client.get(reverse('quality:sub_product'))
 #         self.assertEqual(response.status_code , 302)
 
-class UserChoiceTestCase(TestCase):
-
+class MyTestCase(TestCase):
+    '''Here is a parent class with custom global setup'''
     def setUp(self):
+        '''we call the global setup from test_set.py'''
         self.client = Client()
-        self.user, created = User.objects.get_or_create(username='testuser')
-        if created == True:
-            self.user.set_password('12345')
-
-            self.user.save()
+        self.user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
 
         self.choices = FAKE_DATA_USER_CHOICES
-
 
         self.factory = RequestFactory()
 
         self.record_selected_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
-        self.record_substitut_session = ['substitut_name' , 'substitut_category' , 'substitut_img' , 'substitut_nutriscore' ,
+        self.record_substitut_session = ['substitut_name', 'substitut_category', 'substitut_img', 'substitut_nutriscore',
                           'substitut_url']
         self.p_selected = FAKE_DATA_SELECTED_PRODUCT
 
-    def test_user_choice(self):
+class UserChoiceTestCase(MyTestCase):
+
+    def test_user_choice_page(self):
+        # mock_request_get.return_value = MagicMock(FAKE_DATA_USER_CHOICES)
+        # request = self.factory.get('/quality/user_choice/')
+        # request.user = self.user
+        # response = user_choice(request)
+        # self.assertEqual(response.status_code , 200)
         # the page return 302 status code
         response = self.client.get(reverse('quality:user_choice'))
         self.assertEqual(response.status_code , 302)
+
         # define request
         request = response.wsgi_request
         # define loggued user
@@ -119,6 +124,7 @@ class UserChoiceTestCase(TestCase):
         for value , choice in zip(self.record_selected_session, self.p_selected):
             request.session[value] = choice
         after_first_record = len(request.session.items())
+
         self.assertEqual(after_first_record, before + 5)
 
         # get the choice
@@ -139,7 +145,7 @@ class UserChoiceTestCase(TestCase):
 
         #record backup and check
         backup = Backup.objects.create(
-            user_id=request.user ,
+            user_id=request.user,
             selected_product_id=p_selected)
         after_backup_record = Backup.objects.count()
         self.assertEqual(after_backup_record, 1)
@@ -164,96 +170,98 @@ class UserChoiceTestCase(TestCase):
             request.session[value] = choice
         after_second_record = len(request.session.items())
 
-        self.assertEqual(after_second_record, after_first_record+5)
+        self.assertEqual(after_second_record, after_first_record + 5)
+
+class Myaccount(MyTestCase):
 
     def test_myaccount(self):
-        response = self.client.get(reverse('quality:myaccount'))
-        self.assertEqual(response.status_code , 302)
+        request = self.factory.get('/quality/myaccount/')
+        request.user = self.user
+        response = myaccount(request)
+        self.assertEqual(response.status_code , 200)
+        self.assertEqual(self.user.email, 'jacob@…')
+        self.assertEqual(self.user.username, 'jacob')
+
+class Food(MyTestCase):
+    def test_food(self):
+        # response = self.client.get(reverse('quality:food'))
+        # self.assertEqual(response.status_code, 302)
+
+        request = self.factory.get('/quality/food/')
+        # adding session
+        # middleware = SessionMiddleware()
+        # middleware.process_request(request)
+        # request.session.save()
 
 
+        request.user = self.user
+        response = food(request)
+        self.assertEqual(response.status_code , 200)
 
+class CustomLoginView(MyTestCase):
 
+    def test_login(self):
+        response = self.client.get(reverse('quality:login'))
+        self.assertEqual(response.status_code , 200)
 
-    #
-    # def test_user_choice_page(self):
-    #     # check new User object created
-    #     self.assertEqual(User.objects.count(), 1)
-    #     # check user is logged in
-    #     logged_in = self.client.login(username='testuser', password='12345')
-    #     self.assertEqual(logged_in, True)  # check login success
-    #     #mock request.GET.get
+    def test_logged_user_and_redirect(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        logged_in = self.client.login(username='testuser', password='12345')
+        self.assertTrue(logged_in)
+        response = self.client.get("/")
+        self.assertEqual(response.status_code , 200)
 
+    def test_invalid_user_login(self):
+        response = self.client.login(username= "toto", password= "n'importe quoi")
+        self.assertFalse(response)
 
-        # choices = self.choices.split(', ')
-        #test record p_selected in database
-
-
-        # mock_request_GET.return_value = MagicMock(response=self.choices)
-
-
-
-
-        # p_selected = SelectedProduct.objects.create(
-        #     name='Nutella',
-        #     url='https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero',
-        #     img='https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.147.100.jpg',
-        #     n_grade='e',
-        #     category='Produits à tartiner')
+        # self.assertRedirects(response, accueil)
+        # request = self.factory.get('quality/login/', follow=True)
+        # response = LoginView.as_view()(request)
+        # self.assertEqual(response.status_code , 200)
+        # response = self.client.get(reverse('quality:login'))
+        # # last_url , status_code = response.redirect_chain[-1]
+        # # print(last_url)
         #
-        # backup = Backup.objects.create(
-        #     user_id=,
-        #     selected_product_id=p_selected
-        # )
-
-
+        # # send login data
+        # user = User.objects.create(username='testuser')
+        # user.set_password('12345')
+        # user.save()
+        # logged_in = self.client.login(username='testuser', password='12345')
+        # self.assertTrue(logged_in)
         #
-        # response = self.client.get(reverse('quality:user_choice'))
-        # self.assertEqual(response.status_code , 302)
+        # #test get_success_url
+        # # self.assertRedirects(response, 'quality')
+        # # response=self.client
+        # self.assertRedirects(response, expected_url='quality/', status_code=200, target_status_code=200,
+        #                              msg_prefix='', fetch_redirect_response=True)
 
 
-# class MyAccountTestCase(TestCase):
+class SignupPageTestCase(MyTestCase):
+    # test that success_signup page returns a 200 code
+    def test_signup_page(self):
+        response = self.client.get(reverse('quality:signup'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_logged_user_and_redirect(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        logged_in = self.client.login(username='testuser', password='12345')
+        self.assertTrue(logged_in)
+        response = self.client.get("/")
+        self.assertEqual(response.status_code , 200)
 #
-#     def test_myaccount_page_return_302(self):
-#             '''test that my account return a 200 code'''
-#             response = self.client.get(reverse('quality:myaccount'))
-#             self.assertEqual(response.status_code , 302)
-#
-# class FoodTestCase(TestCase):
-#
-#     def test_food_page_return_200(self):
-#             '''test that food page return a 200 code with requested data '''
-#             user = TestClient()
-#             user.login_user('testclient2', '1234')
-#
-#             #create a selected product
-#
-#
-#             response = self.client.get(reverse('quality:food'))
-#             self.assertEqual(response.status_code , 302)
-#
-#
-#
-# class LoginPageTestCase(TestCase):
-#     # test that login page returns a 200 code
-#     def test_login_page(self):
-#         response = self.client.get(reverse('quality:login'))
-#         self.assertEqual(response.status_code, 200)
-#
-# class SignupPageTestCase(TestCase):
-#     # test that signup page returns a 200 code
-#     def test_signup_page(self):
-#         response = self.client.get(reverse('quality:signup'))
-#         self.assertEqual(response.status_code, 200)
-#
-# class SucessSignupPageTestCase(TestCase):
-#     # test that success_signup page returns a 200 code
-#     def test_success_signup_page(self):
-#         response = self.client.get(reverse('quality:success_signup'))
-#         self.assertEqual(response.status_code, 200)
-#
-# class LogoutPageTestCase(TestCase):
-#     #test that logout page returns a 200 code
-#     #here page when an user logged out is index.html
-#     def test_logout_page(self):
-#         response = self.client.get(reverse('quality:accueil'))
-#         self.assertEqual(response.status_code, 200)
+class LogoutPageTestCase(MyTestCase):
+    #test that logout page returns a 200 code
+    #here page when an user logged out is index.html
+
+    def test_logout_user(self):
+        user = User.objects.create(username='testuser')
+        user.set_password('12345')
+        user.save()
+        logged_in = self.client.login(username='testuser' , password='12345')
+        response = self.client.get('/quality/logout/')
+        self.assertEqual(response.status_code , 200)

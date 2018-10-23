@@ -136,8 +136,7 @@ def food(request):
     user = request.user
 
     # request inner join on selectedproduct/Backup/substitutproduct
-
-    sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id, substitutproduct__user_id=user.id)
+    sel_product_list = SelectedProduct.objects.filter(backup__user_id=user.id, substitutproduct__user_id=user.id).order_by('id')
     sub_product_list = SubstitutProduct.objects.filter(user_id=user.id).order_by('id')
     # Slice pages
     paginator0 = Paginator(sel_product_list, 1)
@@ -161,7 +160,6 @@ def food(request):
         'sel_products': sel_products,
         'sub_products': sub_products
     }
-    print(context)
 
     return render(request, 'quality/food.html', context)
 
@@ -215,8 +213,8 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     template_name = 'quality/registration/signup.html'
     success_message = 'Création de compte réussie ! Vous etes à présent connecté'
 
-
     def get_context_data(self, **kwargs):
+        '''to catch context, especially sucess_message'''
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
@@ -224,9 +222,12 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     def get_success_url(self):
         username = self.request.POST['username']
         password = self.request.POST['password1']
-        user = authenticate(username=username, password=password)
+
+        user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
         return reverse_lazy('quality:success_signup')
+
+
 
 class SuccessSignup(SignUpView):
     template_name = 'quality/registration/success_signup.html'

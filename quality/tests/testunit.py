@@ -66,5 +66,5 @@ class QueryOffTest(MyTestCase):
     # an other way to do that
     @patch('requests.get')#la fonction que l'on souhaite partcher
     def test_request_off(self, mock_requests_get):
-        mock_requests_get.return_value  = MagicMock(status_code=200, response=FAKE_RESULTS)
+        mock_requests_get.return_value = MagicMock(status_code=200, response=FAKE_RESULTS)
         request_off(self.cat,'A')
