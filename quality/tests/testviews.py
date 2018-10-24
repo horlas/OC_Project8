@@ -1,8 +1,5 @@
 from django.test import TestCase, RequestFactory, SimpleTestCase
 from django.urls import reverse
-from django.conf import settings
-from django.contrib.auth import login
-from django.http import HttpRequest
 from django.test.client import Client
 from django.contrib.auth.models import User
 from quality.views import *
@@ -11,79 +8,6 @@ from quality.tests.test_set import *
 from quality.models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.sessions.middleware import SessionMiddleware
 
-
-
-# class TestClient(Client):
-#
-#     def login_user(self, username, pwd):
-#         """
-#         Login as specified user, does not depend on auth backend (hopefully)
-#
-#         This is based on Client.login() with a small hack that does not
-#         require the call to authenticate()
-#         """
-#         user = User.objects.create(username=username)
-#         user.set_password(pwd)
-#         user.save()
-#         c = Client()
-#         c.login(username=username, password=pwd)
-#
-#
-#
-#
-# class IndexPageTestCase(TestCase):
-#
-#     # test that index page returns a 200 code
-#     def test_index_page(self):
-#         response = self.client.get(reverse('quality:accueil'))
-#         self.assertEqual(response.status_code, 200)
-#
-#
-# class AccountPageTestCase(TestCase):
-#     # test that home page returns a 302 code
-#     def test_myaccount_page(self):
-#         response = self.client.get(reverse('quality:myaccount'))
-#         self.assertEqual(response.status_code, 302)
-#
-#
-# class FoodPageTestCase(TestCase, Client):
-#
-#     def test_food_page_return_302(self):
-#         '''test that food page returns a 302 code'''
-#         response = self.client.get(reverse('quality:food'))
-#         self.assertEqual(response.status_code, 302)
-#
-#
-# class QueryDataTestCase(TestCase):
-#
-#     def test_query_data_page_return_200(self):
-#         '''test that query data page return a 200 code'''
-#         response = self.client.get(reverse('quality:query_data'))
-#         self.assertEqual(response.status_code , 200)
-#
-#     def test_query_data_empty(self):
-#         '''a test not very useful ;-)'''
-#         query = None
-#         if not query:
-#             title = "saisissez un produit ! "
-#             context = {'title': title}
-#         self.assertEqual(context['title'], "saisissez un produit ! ")
-#
-#     def test_query_data_result(self):
-#         '''we test that data lenght is 6 to be sure our methods return results from OFF API'''
-#         data = query_off('nutella')
-#         self.assertEqual(len(data), 6)
-
-
-# class SubProductTestCase(TestCase):
-#     # choices = "Nutella, Pâtes à tartiner aux noisettes et au cacao," \
-#     #           " https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg," \
-#     #           " E, https://fr.openfoodfacts.org/produit/3017624047813/nutella"
-#     # choices = choices.split(', ')
-#     def test_sub_product_page(self):
-#         '''test that sub product return a 200 code'''
-#         response = self.client.get(reverse('quality:sub_product'))
-#         self.assertEqual(response.status_code , 302)
 
 class MyTestCase(TestCase):
     '''Here is a parent class with custom global setup'''
@@ -102,15 +26,71 @@ class MyTestCase(TestCase):
                           'substitut_url']
         self.p_selected = FAKE_DATA_SELECTED_PRODUCT
 
+class AccueilTest(MyTestCase):
+    def test_accueil(self):
+        request = self.factory.get('')
+        response = accueil(request)
+        self.assertEqual(response.status_code , 200)
+
+class CreditsTest(MyTestCase):
+    def test_credits(self):
+        request = self.factory.get('/quality/credits/')
+        response = credits(request)
+        self.assertEqual(response.status_code , 200)
+
+class QueryDataTest(MyTestCase):
+    def test_query_data(self):
+        request = self.factory.get('/quality/query_data/')
+        response = query_data(request)
+        self.assertEqual(response.status_code , 200)
+
+# class SubProductTestCase(TestCase):
+#     def test_sub_product_page(self):
+#         '''test that sub product return a 200 code'''
+#         response = self.client.get(reverse('quality:sub_product'))
+#         self.assertEqual(response.status_code , 302)
+
+
+
+
+#####essai avec patch substitut product en cours de developpement#######
+# class SubProductTestCase(MyTestCase):
+#
+#     @patch('best_substitut') # la fonction que l'on souhaite partcher
+#     def test_sub_product_page(self, mock_best_substitut):
+#         best_substitut = MagicMock(return_value=FAKE_RETURN_BESTSUBSTITUT)
+#         request = self.factory.get('/quality/sub_product/', {'subscribe' : self.choices})
+#         request.user = self.user
+#         #adding session
+#         middleware = SessionMiddleware()
+#         middleware.process_request(request)
+#
+#         request.session.save()
+#         record_session = self.record_selected_session
+#         for values in record_session:
+#             request.session[values] = values
+#             print(request.session[values])
+#
+#         response = sub_product(request)
+#
+#
+#         self.assertEqual(response.status_code , 200)
+
+
+
+
+
+
+
+
+
+
+
+
 class UserChoiceTestCase(MyTestCase):
 
     def test_user_choice_page(self):
-        # mock_request_get.return_value = MagicMock(FAKE_DATA_USER_CHOICES)
-        # request = self.factory.get('/quality/user_choice/')
-        # request.user = self.user
-        # response = user_choice(request)
-        # self.assertEqual(response.status_code , 200)
-        # the page return 302 status code
+
         response = self.client.get(reverse('quality:user_choice'))
         self.assertEqual(response.status_code , 302)
 
@@ -217,28 +197,6 @@ class CustomLoginView(MyTestCase):
         response = self.client.login(username= "toto", password= "n'importe quoi")
         self.assertFalse(response)
 
-        # self.assertRedirects(response, accueil)
-        # request = self.factory.get('quality/login/', follow=True)
-        # response = LoginView.as_view()(request)
-        # self.assertEqual(response.status_code , 200)
-        # response = self.client.get(reverse('quality:login'))
-        # # last_url , status_code = response.redirect_chain[-1]
-        # # print(last_url)
-        #
-        # # send login data
-        # user = User.objects.create(username='testuser')
-        # user.set_password('12345')
-        # user.save()
-        # logged_in = self.client.login(username='testuser', password='12345')
-        # self.assertTrue(logged_in)
-        #
-        # #test get_success_url
-        # # self.assertRedirects(response, 'quality')
-        # # response=self.client
-        # self.assertRedirects(response, expected_url='quality/', status_code=200, target_status_code=200,
-        #                              msg_prefix='', fetch_redirect_response=True)
-
-
 class SignupPageTestCase(MyTestCase):
     # test that success_signup page returns a 200 code
     def test_signup_page(self):
@@ -253,7 +211,15 @@ class SignupPageTestCase(MyTestCase):
         self.assertTrue(logged_in)
         response = self.client.get("/")
         self.assertEqual(response.status_code , 200)
-#
+
+class SuccessSignupTestCase(TestCase):
+     def test_success_signup_page(self):
+        response = self.client.get(reverse('quality:success_signup'))
+        self.assertEqual(response.status_code, 200)
+        #test that class which contains sucess_message exists
+        self.assertContains(response , 'class="text-account' , 1)
+
+
 class LogoutPageTestCase(MyTestCase):
     #test that logout page returns a 200 code
     #here page when an user logged out is index.html

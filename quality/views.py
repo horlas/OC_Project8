@@ -227,8 +227,6 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
         login(self.request, user)
         return reverse_lazy('quality:success_signup')
 
-
-
 class SuccessSignup(SignUpView):
     template_name = 'quality/registration/success_signup.html'
 
