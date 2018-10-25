@@ -39,7 +39,15 @@ def data_process(products):
     '''function which keeps only data we need from the OpenFood Facts return
     we extract the first product'''
     list = []
-    for i in range(6):
+
+    # we return a list that does not exceed 6 items
+    # otherwise it is equal to the list of returned products
+    if len(products)<6:
+        a=len(products)
+    else:
+        a=6
+
+    for i in range(a):
         try:
             dict = {
                 'product_name' : products[i]['product_name'],
@@ -71,7 +79,6 @@ def query_off(query):
     response = requests.get(url)
     result = response.json()
     products = result['products']
-
     return data_process(products)
 
 def best_substitut(cat):
@@ -85,9 +92,11 @@ def best_substitut(cat):
             for dict in res:
                 list.append(dict)
     return data_process(list)
-#
-# if __name__ == '__main__':
-#
-#     cat = 'Sauces Pesto'
-#     best_substitut(cat)
 
+# if __name__ == '__main__':
+
+    # cat = 'Sardines natures'
+    # best_substitut(cat)
+    #
+    # query = 'ssqdsqd'
+    # query_off(query)

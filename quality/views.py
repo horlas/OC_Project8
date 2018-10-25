@@ -34,7 +34,9 @@ def query_data(request):
      and we display useful data '''
 
     query = request.GET.get('query', None)
+
     if not query:
+
         title = "saisissez un produit ! "
         context = {'title': title }
         return render(request, 'quality/index.html', context)
@@ -42,11 +44,19 @@ def query_data(request):
         #query_off function calls OFF API and return 6 products
         data = query_off(query)
 
-        title = 'Votre recherche est :  "{}"'. format(query)
-        context = {
-            'title': title,
-            'data' : data
-        }
+        #in case of invalid user entry
+        if not data:
+            title = 'Votre recherche "{}" n \' a donné aucun resultat!'.format(query)
+            context = {'title': title}
+            return render(request , 'quality/index.html' , context)
+
+        #in case of valid entry
+        else:
+            title = 'Votre recherche est :  "{}"'. format(query)
+            context = {
+                'title': title,
+                'data' : data
+            }
 
     return render(request, 'quality/query_data.html', context)
 

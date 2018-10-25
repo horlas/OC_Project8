@@ -44,7 +44,7 @@ class QueryDataTest(MyTestCase):
         response = query_data(request)
         self.assertEqual(response.status_code , 200)
 
-class SubProductTestCase(MyTestCase):
+# class SubProductTestCase(MyTestCase):
     # def test_sub_product_page(self):
     #     '''test that sub product return a 200 code'''
     #     response = self.client.get(reverse('quality:sub_product'))
@@ -65,28 +65,28 @@ class SubProductTestCase(MyTestCase):
 
 
 
-#####essai avec patch substitut product en cours de developpement#######
-# class SubProductTestCase(MyTestCase):
-#
-#     @patch('best_substitut') # la fonction que l'on souhaite partcher
-#     def test_sub_product_page(self, mock_best_substitut):
-#         best_substitut = MagicMock(return_value=FAKE_RETURN_BESTSUBSTITUT)
-#         request = self.factory.get('/quality/sub_product/', {'subscribe' : self.choices})
-#         request.user = self.user
-#         #adding session
-#         middleware = SessionMiddleware()
-#         middleware.process_request(request)
-#
-#         request.session.save()
-#         record_session = self.record_selected_session
-#         for values in record_session:
-#             request.session[values] = values
-#             print(request.session[values])
-#
-#         response = sub_product(request)
-#
-#
-#         self.assertEqual(response.status_code , 200)
+####essai avec patch substitut product en cours de developpement#######
+class SubProductTestCase(MyTestCase):
+
+    @patch('best_substitut') # la fonction que l'on souhaite patcher
+    def test_sub_product_page(self, mock_best_substitut):
+        mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT
+        request = self.factory.get('/quality/sub_product/', {'subscribe' : self.choices}) #self.choices = FAKE_DATA_USER_CHOICES
+        request.user = self.user
+        #adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+
+        request.session.save()
+        record_session = self.record_selected_session
+        for values in record_session:
+            request.session[values] = values
+
+        response = sub_product(request)
+
+
+
+        self.assertEqual(response.status_code , 200)
 
 
 
