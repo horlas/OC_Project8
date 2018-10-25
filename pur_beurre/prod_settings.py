@@ -6,7 +6,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-SECRET_KEY = ')(v10co96cxd@d^k+gnefi_jw_boavod*x(uzxkw-k+x!)y1^@'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*', 'pbquality.herokuapp.com']
 

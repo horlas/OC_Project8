@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from quality.methods import *
 import requests
 import json
-from quality.tests.test_set import *
+from quality.tests.fake import *
 
 
 #test tests!
@@ -17,7 +17,7 @@ class MyTest(TestCase):
 class MyTestCase(TestCase):
     '''Here is a parent class with custom global setup'''
     def setUp(self):
-        '''we call the global setup from test_set.py'''
+        '''we call the global setup from fake.py'''
         self.results = FAKE_RESULTS['products']
         self.products = FAKE_PRODUCTS #return of data_process
         self.url = FAKE_URL

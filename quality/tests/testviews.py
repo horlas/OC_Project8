@@ -4,7 +4,7 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 from quality.views import *
 from unittest.mock import patch, MagicMock
-from quality.tests.test_set import *
+from quality.tests.fake import *
 from quality.models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.sessions.middleware import SessionMiddleware
 
@@ -12,7 +12,7 @@ from django.contrib.sessions.middleware import SessionMiddleware
 class MyTestCase(TestCase):
     '''Here is a parent class with custom global setup'''
     def setUp(self):
-        '''we call the global setup from test_set.py'''
+        '''we call the global setup from fake.py'''
         self.client = Client()
         self.user = User.objects.create_user(
             username='jacob', email='jacob@…', password='top_secret')
@@ -44,12 +44,24 @@ class QueryDataTest(MyTestCase):
         response = query_data(request)
         self.assertEqual(response.status_code , 200)
 
-# class SubProductTestCase(TestCase):
-#     def test_sub_product_page(self):
-#         '''test that sub product return a 200 code'''
-#         response = self.client.get(reverse('quality:sub_product'))
-#         self.assertEqual(response.status_code , 302)
+class SubProductTestCase(MyTestCase):
+    # def test_sub_product_page(self):
+    #     '''test that sub product return a 200 code'''
+    #     response = self.client.get(reverse('quality:sub_product'))
+    #     self.assertEqual(response.status_code , 302)
 
+    # def test_sub_product_page(self):
+    #     request = self.factory.get('/quality/sub_product/' , {'subscribe': self.choices})
+    #     #adding session
+    #     middleware = SessionMiddleware()
+    #     middleware.process_request(request)
+    #
+    #     request.session.save()
+    #     record_session = self.record_selected_session
+    #     for values in record_session:
+    #         request.session[values] = values
+    #     response = sub_product(request)
+    #     self.assertEqual(response.status_code , 200)
 
 
 
