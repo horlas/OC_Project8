@@ -187,10 +187,6 @@ def logout_view(request):
     return redirect('quality:accueil')
 
 
-
-
-
-
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'quality/registration/signup.html'

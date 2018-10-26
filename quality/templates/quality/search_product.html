@@ -1,12 +1,13 @@
-
- <hr>
- <p class="font-weight-bold  mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</p>
- <div class="col-lg-8 mx-auto">
-
-    <form action="{% url 'quality:query_data' %}" method="get" accept-charset="utf-8">
-
-       <input type="text" name="query" id ="query">
-       <input type="submit" class="btn btn-primary btn-xl" value="Chercher">
-
-    </form>
- </div>
+<hr>
+<p class="font-weight-bold  mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</p>
+<div class="col-lg-8 mx-auto">
+   <form action="{% url 'quality:query_data' %}" method="get" accept-charset="utf-8">
+      <input type="text" name="query" id ="query">
+      <input type="submit" class="btn btn-primary btn-xl" value="Chercher">
+   </form>
+   <hr>
+    <!-- To display invalid user entries-->
+   <h2 class="custom-color">
+      <strong>{{title}}</strong>
+   </h2>
+</div>
