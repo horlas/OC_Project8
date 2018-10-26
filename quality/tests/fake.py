@@ -6,7 +6,7 @@ FAKE_DATA_SELECTED_PRODUCT = ['Nutella', 'Pâtes à tartiner aux noisettes et au
 FAKE_DATA_USER_CHOICES = {
     'subscribe' : 'Pâte à Tartiner, Pâtes à tartiner aux noisettes et au cacao, https://static.openfoodfacts.org/images/products/366/207/201/3370/front_fr.4.100.jpg, A, https://fr.openfoodfacts.org/produit/3662072013370/pate-a-tartiner-so-tasty'}
 
-FAKE_DATA_USER_CHOICES2 = 'Pâte à Tartiner, Pâtes à tartiner aux noisettes et au cacao, https://static.openfoodfacts.org/images/products/366/207/201/3370/front_f'
+FAKE_DATA_USER_CHOICES2 = 'Pâte à Tartiner, Pâtes à tartiner aux noisettes et au cacao, https://static.openfoodfacts.org/images/products/366/207/201/3370/front_fr.4.100.jpg, A, https://fr.openfoodfacts.org/produit/3662072013370/pate-a-tartiner-so-tasty'
 
 
 

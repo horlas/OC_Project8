@@ -1,13 +1,11 @@
-from django.test import TestCase, RequestFactory, SimpleTestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.test.client import Client
 from django.contrib.auth.models import User
 from quality.views import *
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from quality.tests.fake import *
-from quality.models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.sessions.middleware import SessionMiddleware
-
 
 class MyTestCase(TestCase):
     '''Here is a parent class with custom global setup'''
@@ -44,33 +42,13 @@ class QueryDataTest(MyTestCase):
         response = query_data(request)
         self.assertEqual(response.status_code , 200)
 
-# class SubProductTestCase(MyTestCase):
-    # def test_sub_product_page(self):
-    #     '''test that sub product return a 200 code'''
-    #     response = self.client.get(reverse('quality:sub_product'))
-    #     self.assertEqual(response.status_code , 302)
-
-    # def test_sub_product_page(self):
-    #     request = self.factory.get('/quality/sub_product/' , {'subscribe': self.choices})
-    #     #adding session
-    #     middleware = SessionMiddleware()
-    #     middleware.process_request(request)
-    #
-    #     request.session.save()
-    #     record_session = self.record_selected_session
-    #     for values in record_session:
-    #         request.session[values] = values
-    #     response = sub_product(request)
-    #     self.assertEqual(response.status_code , 200)
-
-
-
-####essai avec patch substitut product en cours de developpement#######
 class SubProductTestCase(MyTestCase):
 
-    @patch('best_substitut') # la fonction que l'on souhaite patcher
+    @patch('quality.methods.best_substitut') # la fonction que l'on souhaite patcher
     def test_sub_product_page(self, mock_best_substitut):
-        mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT
+
+        mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT # return fake datas
+
         request = self.factory.get('/quality/sub_product/', {'subscribe' : self.choices}) #self.choices = FAKE_DATA_USER_CHOICES
         request.user = self.user
         #adding session
@@ -83,33 +61,17 @@ class SubProductTestCase(MyTestCase):
             request.session[values] = values
 
         response = sub_product(request)
-
-
-
         self.assertEqual(response.status_code , 200)
 
-
-
-
-
-
-
-
-
-
-
-
 class UserChoiceTestCase(MyTestCase):
-
     def test_user_choice_page(self):
-
-        response = self.client.get(reverse('quality:user_choice'))
-        self.assertEqual(response.status_code , 302)
-
-        # define request
-        request = response.wsgi_request
-        # define loggued user
+        request = self.factory.get('/quality/sub_product/' , {'subscribe': FAKE_DATA_USER_CHOICES2})
         request.user = self.user
+        # adding session
+        middleware = SessionMiddleware()
+        middleware.process_request(request)
+
+        request.session.save()
 
         # record in session a product selected before and check the record
         before = len(request.session.items())
@@ -119,50 +81,8 @@ class UserChoiceTestCase(MyTestCase):
 
         self.assertEqual(after_first_record, before + 5)
 
-        # get the choice
-        choices = self.choices.get('subscribe', None)
-        choices = choices.split(', ')
-        self.assertEqual(len(choices), 5)
-
-        #record p_selected in database and check the record
-
-        p_selected = SelectedProduct.objects.create(
-            name=request.session['selected_name'] ,
-            url=request.session['selected_url'] ,
-            img=request.session['selected_img'] ,
-            n_grade=request.session['selected_nutriscore'] ,
-            category=request.session['selected_category'])
-        after_record = SelectedProduct.objects.count()
-        self.assertEqual(after_record, 1)
-
-        #record backup and check
-        backup = Backup.objects.create(
-            user_id=request.user,
-            selected_product_id=p_selected)
-        after_backup_record = Backup.objects.count()
-        self.assertEqual(after_backup_record, 1)
-
-        # record substitut and check
-        p_substitut = SubstitutProduct.objects.create(
-            name = choices[0],
-            category = choices[1],
-            img = choices[2],
-            n_grade = choices[3],
-            url = choices[4],
-
-            backup_id = backup,
-            user_id = request.user,
-            selected_product_id = p_selected
-        )
-        after_substitut_record = SubstitutProduct.objects.count()
-        self.assertEqual(after_substitut_record, 1)
-
-        # record in session a product substitut before and check the record
-        for value , choice in zip(self.record_substitut_session, choices):
-            request.session[value] = choice
-        after_second_record = len(request.session.items())
-
-        self.assertEqual(after_second_record, after_first_record + 5)
+        response = user_choice(request)
+        self.assertEqual(response.status_code , 200)
 
 class Myaccount(MyTestCase):
 
@@ -176,16 +96,7 @@ class Myaccount(MyTestCase):
 
 class Food(MyTestCase):
     def test_food(self):
-        # response = self.client.get(reverse('quality:food'))
-        # self.assertEqual(response.status_code, 302)
-
         request = self.factory.get('/quality/food/')
-        # adding session
-        # middleware = SessionMiddleware()
-        # middleware.process_request(request)
-        # request.session.save()
-
-
         request.user = self.user
         response = food(request)
         self.assertEqual(response.status_code , 200)
@@ -240,6 +151,6 @@ class LogoutPageTestCase(MyTestCase):
         user = User.objects.create(username='testuser')
         user.set_password('12345')
         user.save()
-        logged_in = self.client.login(username='testuser' , password='12345')
+        logged_in = self.client.login(username='testuser', password='12345')
         response = self.client.get('/quality/logout/')
         self.assertEqual(response.status_code , 200)

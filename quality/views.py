@@ -1,24 +1,17 @@
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
-from django.http import HttpResponseRedirect
 from django.contrib.auth.views import LoginView
 from  django.contrib.auth import REDIRECT_FIELD_NAME, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import RedirectView
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
-from django.http import JsonResponse
 from .methods import query_off, best_substitut
 from .models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login
-from django_ajax.decorators import ajax
-
-
-
 from django.views.generic import TemplateView
 
 
@@ -91,6 +84,9 @@ def sub_product(request):
 
 @login_required
 def user_choice(request):
+    '''View showing the pair of products saved.
+     Registers data in the database.
+     The substitute product is recorded in the session for display.'''
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
 
@@ -177,35 +173,13 @@ def food(request):
 
 # Authentification views
 
-
 class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'quality/registration/login.html'
     success_message = 'Vous etes à présent connecté'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     return context
-
-    def get_success_url(self):
-        return reverse_lazy('quality:accueil')
-
+    #
     # def get_success_url(self):
-    #     url = "{}".format(self.request.META.get('HTTP_REFERER', None))
-    #     print(url)
-    #     return HttpResponseRedirect(reverse_lazy(url))
-
-
-
-# class LogoutView(RedirectView):
-#     template_name = 'quality/index.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         logout(request)
-#         return super(LogoutView, self.template_name).get(request, *args, **kwargs)
-
-#
-
+    #     return reverse_lazy('quality:accueil')
 
 class LogoutView(TemplateView):
     template_name = 'quality/index.html'
@@ -215,8 +189,6 @@ class LogoutView(TemplateView):
         logout(request)
         context = super().get_context_data(**kwargs)
         return render(request, self.template_name, context)
-
-
 
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm
@@ -243,11 +215,4 @@ class SuccessSignup(SignUpView):
     def get_context_data(self , **kwargs):
         context = super(SignUpView , self).get_context_data(**kwargs)
         return context
-
-
-
-
-
-
-
 
