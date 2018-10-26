@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect,  get_object_or_404
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from django.contrib.auth.views import LoginView
 from  django.contrib.auth import REDIRECT_FIELD_NAME, logout
@@ -12,8 +12,10 @@ from .models import SelectedProduct, SubstitutProduct, Backup
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView
+from django.contrib import messages
 
+from django.views.generic import TemplateView
+from django.http import HttpResponse, HttpResponseRedirect
 
 def accueil(request):
     return render(request, 'quality/index.html')
@@ -148,11 +150,11 @@ def food(request):
     paginator0 = Paginator(sel_product_list, 1)
     paginator1 = Paginator(sub_product_list, 1)
     # Get current page
-    page = request.GET.get('page')
+    page = request.GET.get('page', 1)
     try:
         #return only the first product and not the others
-        sel_products = paginator0.get_page(page)
-        sub_products = paginator1.get_page(page)
+        sel_products = paginator0.page(page)
+        sub_products = paginator1.page(page)
 
     except PageNotAnInteger:
         # If page is not an integer, deliver first page
@@ -177,18 +179,17 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'quality/registration/login.html'
     success_message = 'Vous etes à présent connecté'
-    #
-    # def get_success_url(self):
-    #     return reverse_lazy('quality:accueil')
 
-class LogoutView(TemplateView):
-    template_name = 'quality/index.html'
-    success_message = "Vous etes déconnecté"
 
-    def get(self, request, **kwargs):
-        logout(request)
-        context = super().get_context_data(**kwargs)
-        return render(request, self.template_name, context)
+def logout_view(request):
+    logout(request)
+    messages.success(request , ('Vous etes déconnecté'))
+    return redirect('quality:accueil')
+
+
+
+
+
 
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm

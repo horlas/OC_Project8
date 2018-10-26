@@ -153,4 +153,4 @@ class LogoutPageTestCase(MyTestCase):
         user.save()
         logged_in = self.client.login(username='testuser', password='12345')
         response = self.client.get('/quality/logout/')
-        self.assertEqual(response.status_code , 200)
+        self.assertEqual(response.status_code , 302)

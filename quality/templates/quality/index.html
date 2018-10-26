@@ -19,25 +19,11 @@
    <div class="container my-auto">
    <div class="row">
       <div class="col-lg-10 mx-auto">
-
-            {% if messages %}
-               {% for message in messages %}
-                <p class ='custom_title'>{{ message }}</p>
-                {% endfor %}
-
-            {% endif %}
-
-           <p class="custom_title">{{view.success_message}}</p>
-
+            {% include 'quality/display_messages.html' %}
           <h1 class="text-uppercase">
             <strong>Du gras, oui, mais de la qualité!</strong>
           </h1>
-
-          <h4 class="custom-color">
-               <strong>{{title}}</strong>
-          </h4>
         {% include 'quality/search_product.html' %}
-
       </div>
    </div>
 </header>
