@@ -23,7 +23,7 @@ Un couple de restaurateurs décide de lancer une plateforme web qui permettrait 
 
 Pour cela il font appel à nous pour développer une première version de leur application web.
 
-####Objectif:
+#### Objectif:
 
 L'utilisateur devra en un clic trouver un produit de substitution.
 Il pourra ouvrir un espace personnel où il pourra enregistrer ses sauvegardes et les retrouver par la suite en se connectant sur son compte.
@@ -59,7 +59,7 @@ A couple of restaurateurs decided to launch a web platform that would allow thei
 
 For this, they call on us to develop a first version of their web application.
 
-####Goal:
+#### Goal:
 
 The user will have in one click find a substitute product.
 He can open a personal space where he can save his backups and find them later by logging into his account.
