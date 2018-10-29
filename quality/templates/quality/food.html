@@ -33,58 +33,45 @@
             </div>
             </div>
             {% endfor %}
-            <!--<div>-->
-               <!--<span class="step-links">-->
-               <!--{% if sub_products.has_previous %}-->
-               <!--<a href="?page=1"><< premier</a>-->
-               <!--<a href="?page={{ sub_products.previous_page_number }}">précédent</a>-->
-               <!--{% endif %}-->
-               <!--<span class="current">-->
-               <!--Page {{ sub_products.number }} sur {{ sub_products.paginator.num_pages }}.-->
-               <!--</span>-->
-               <!--{% if sub_products.has_next %}-->
-               <!--<a href="?page={{ sub_products.next_page_number }}">suivant</a>-->
-               <!--<a href="?page={{ sub_products.paginator.num_pages }}">dernier &raquo;</a>-->
-               <!--{% endif %}-->
-               <!--</span>-->
-            <!--</div>-->
-    <div class="container">
-             {% if sub_products.has_other_pages %}
-                 <ul class="pagination">
-                    {% if sub_products.has_previous %}
-                    <li><a href="?page={{ sub_products.previous_page_number }}">&laquo;</a></li>
-                    {% else %}
-                    <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
-                    {% for i in sub_products.paginator.page_range %}
-                    {% if sub_products.number == i %}
-                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                    {% else %}
-                     <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
+            <div>
+               <span class="step-links">
+               {% if sub_products.has_previous %}
+               <a href="?page=1"><< premier</a>
+               <a href="?page={{ sub_products.previous_page_number }}">précédent</a>
+               {% endif %}
+               <span class="current">
+               Page {{ sub_products.number }} sur {{ sub_products.paginator.num_pages }}.
+               </span>
+               {% if sub_products.has_next %}
+               <a href="?page={{ sub_products.next_page_number }}">suivant</a>
+               <a href="?page={{ sub_products.paginator.num_pages }}">dernier &raquo;</a>
+               {% endif %}
+               </span>
+            </div>
+    <!--<div class="container">-->
+             <!--{% if sub_products.has_other_pages %}-->
+                 <!--<ul class="pagination">-->
+                    <!--{% if sub_products.has_previous %}-->
+                    <!--<li><a href="?page={{ sub_products.previous_page_number }}">&laquo;</a></li>-->
+                    <!--{% else %}-->
+                    <!--<li class="disabled"><span>&laquo;</span></li>-->
+                    <!--{% endif %}-->
+                    <!--{% for i in sub_products.paginator.page_range %}-->
+                    <!--{% if sub_products.number == i %}-->
+                    <!--<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>-->
+                    <!--{% else %}-->
+                     <!--<li><a href="?page={{ i }}">{{ i }}</a></li>-->
+                    <!--{% endif %}-->
 
-                    {% endfor %}
-                    {% if sub_products.has_next %}
-                    <li><a href="?page={{ sub_products.next_page_number }}">&raquo;</a></li>
-                    {% else %}
-                    <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-                    </ul>
-             {% endif %}
-    </div>
-               <!--<ul class="pagination">-->
-                  <!--{% for page in sub_products.paginator.page_range %}-->
-
-                  <!--<li><a href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>-->
-
-                  <!--{% endfor %}-->
-
-               <!--</ul>-->
-            <!--</div>-->
-
-
-
-
+                    <!--{% endfor %}-->
+                    <!--{% if sub_products.has_next %}-->
+                    <!--<li><a href="?page={{ sub_products.next_page_number }}">&raquo;</a></li>-->
+                    <!--{% else %}-->
+                    <!--<li class="disabled"><span>&raquo;</span></li>-->
+                    <!--{% endif %}-->
+                    <!--</ul>-->
+             <!--{% endif %}-->
+    <!--</div>-->
 
          </div>
       </div>

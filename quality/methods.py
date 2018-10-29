@@ -42,32 +42,24 @@ def data_process(products):
 
     # we return a list that does not exceed 6 items
     # otherwise it is equal to the list of returned products
-    if len(products)<6:
-        a=len(products)
+    if len(products) < 6:
+        a = len(products)
     else:
-        a=6
+        a = 6
 
     for i in range(a):
-        try:
-            dict = {
-                'product_name' : products[i]['product_name'],
-                'nutriscore' : products[i]['nutrition_grades'].upper(),
-                'img' : products[i]['image_thumb_url'],
 
-                # keep the last category the most significant
-                'category' : products[i]['categories'].split(',')[-1],
-                'url' : products[i]['url'],
-            }
-        # some products in OFF database have no image, we get image_igredients
-        except KeyError:
-            dict = {
-                'product_name' : products[i]['product_name'],
-                'nutriscore' : products[i]['nutrition_grades'].upper(),
-                'img' : products[i]['image_ingredients_small_url'],
-                # keep the last category the most significant
-                'category' : products[i]['categories'].split(',')[-1],
-                'url' : products[i]['url'],
-            }
+        dict = {
+            'product_name': products[i].get('product_name', 'Non renseigné'),
+            'nutriscore': products[i].get('nutrition_grades', 'NC').upper(),
+            'img': products[i].get('image_thumb_url', 'image_ingredients_small_url'),
+
+            # keep the last category the most significant
+            'category': products[i]['categories'].split(',')[-1],
+            'url': products[i]['url'],
+            'img_nutrition'  : products[i].get('image_nutrition_url', 'image_ingredients_small_url'),
+            'magasins': products[i].get('stores', 'NC')
+        }
         list.append(dict)
 
     return list
@@ -79,6 +71,7 @@ def query_off(query):
     response = requests.get(url)
     result = response.json()
     products = result['products']
+    print(products)
     return data_process(products)
 
 def best_substitut(cat):
@@ -93,10 +86,10 @@ def best_substitut(cat):
                 list.append(dict)
     return data_process(list)
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 
     # cat = 'Sardines natures'
     # best_substitut(cat)
     #
-    # query = 'ssqdsqd'
-    # query_off(query)
+    query = 'tarama'
+    query_off(query)
