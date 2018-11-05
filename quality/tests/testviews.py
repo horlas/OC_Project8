@@ -135,14 +135,6 @@ class SignupPageTestCase(MyTestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code , 200)
 
-class SuccessSignupTestCase(TestCase):
-     def test_success_signup_page(self):
-        response = self.client.get(reverse('quality:success_signup'))
-        self.assertEqual(response.status_code, 200)
-        #test that class which contains sucess_message exists
-        self.assertContains(response , 'class="text-account' , 1)
-
-
 class LogoutPageTestCase(MyTestCase):
     #test that logout page returns a 200 code
     #here page when an user logged out is index.html

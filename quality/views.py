@@ -180,36 +180,31 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
     template_name = 'quality/registration/login.html'
     success_message = 'Vous etes à présent connecté'
 
-
-def logout_view(request):
-    logout(request)
-    messages.success(request , ('Vous etes déconnecté'))
-    return redirect('quality:accueil')
-
-
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'quality/registration/signup.html'
     success_message = 'Création de compte réussie ! Vous etes à présent connecté'
 
     def get_context_data(self, **kwargs):
-        '''to catch context, especially sucess_message'''
+        '''to catch context, especially success_message'''
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
 
     def get_success_url(self):
+        #log user after register
         username = self.request.POST['username']
         password = self.request.POST['password1']
 
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
-        return reverse_lazy('quality:success_signup')
 
-class SuccessSignup(SignUpView):
-    template_name = 'quality/registration/success_signup.html'
+        referer_url = self.request.META.get('HTTP_REFERER')
 
-    def get_context_data(self , **kwargs):
-        context = super(SignUpView , self).get_context_data(**kwargs)
-        return context
+        return referer_url
 
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, ('Vous etes déconnecté'))
+    return redirect('quality:accueil')

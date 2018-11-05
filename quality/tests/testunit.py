@@ -32,17 +32,20 @@ class QueryOffTest(MyTestCase):
 
         products = self.results
         self.assertEqual(data_process(products).__len__(), 6)
-        self.assertEqual(data_process(products)[0].__len__(), 5)
+        self.assertEqual(data_process(products)[0].__len__(), 7)
+        #test some stuff among the list
         self.assertEqual(data_process(products)[0]['product_name'], 'Nutella')
         self.assertEqual(data_process(products)[1]['img'], 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg')
         self.assertEqual(data_process(products)[2]['url'], 'https://fr.openfoodfacts.org/produit/3017620401473/nutella-ferrero')
         self.assertEqual(data_process(products)[3]['category'], 'Pâtes à tartiner aux noisettes et au cacao')
         self.assertEqual(data_process(products)[4]['nutriscore'], 'E')
+        self.assertEqual(data_process(products)[5]['img_nutrition'], 'https://static.openfoodfacts.org/images/products/301/762/042/1006/nutrition_fr.75.400.jpg')
+        self.assertEqual(data_process(products)[0]['magasins'], 'Intermarché')
 
     def test_query_off(self):
         '''the function query_off must return a status_200 and processed datas'''
         response = requests.get(self.url)
-        products = data_process(self.results) # the return of query_off
+        products = data_process(self.results)# the return of query_off function
         self.assertEqual(response.status_code, 200)
         self.assertEqual(products, self.products)
 
@@ -56,7 +59,7 @@ class QueryOffTest(MyTestCase):
 
         cat = self.cat
         data = best_substitut(cat)
-        self.assertEqual(len(data) , 6)
+        self.assertEqual(len(data), 6)
         self.assertEqual(data[0]['nutriscore'], 'A')
         self.assertEqual(data[5]['nutriscore'] , 'C')
         self.assertEqual(data, self.substituts)

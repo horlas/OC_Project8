@@ -71,7 +71,6 @@ def query_off(query):
     response = requests.get(url)
     result = response.json()
     products = result['products']
-    print(products)
     return data_process(products)
 
 def best_substitut(cat):
@@ -88,8 +87,11 @@ def best_substitut(cat):
 
 if __name__ == '__main__':
 
-    # cat = 'Sardines natures'
-    # best_substitut(cat)
+    # cat = 'Sauces Pesto'
+    # data = best_substitut(cat)
+    # print(len(data), data[0]['nutriscore'], data[5]['nutriscore'], data)
+
     #
-    query = 'tarama'
-    query_off(query)
+    query = 'Nutella'
+    data = query_off(query)
+    print(data)

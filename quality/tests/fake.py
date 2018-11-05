@@ -14,56 +14,14 @@ FAKE_DATA_USER_CHOICES2 = 'Pâte à Tartiner, Pâtes à tartiner aux noisettes e
 
 ############ Fake datas for testing methods.py#############
 
-FAKE_RETURN_BESTSUBSTITUT =[{'url': 'https://fr.openfoodfacts.org/produit/8001060014657/pesto-salsa-maestra', 'category': 'Sauces Pesto', 'product_name': 'Pesto', 'nutriscore': 'A', 'img': 'https://static.openfoodfacts.org/images/products/800/106/001/4657/front_fr.4.100.jpg'},
-                            {'url': 'https://fr.openfoodfacts.org/produit/3466090484484/soupe-de-poissons-de-roche-au-bec-fin', 'category': 'Sauces Pesto', 'product_name': 'Soupe de poissons de roche', 'nutriscore': 'B', 'img': 'https://static.openfoodfacts.org/images/products/346/609/048/4484/front_fr.13.100.jpg'},
-                            {'url': 'https://fr.openfoodfacts.org/produit/3564700571170/sauce-pesto-au-basilic-frais-turini', 'category': 'Sauces Pesto', 'product_name': 'Sauce Pesto au basilic frais', 'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/356/470/057/1170/front_fr.37.100.jpg'},
-                            {'url': 'https://fr.openfoodfacts.org/produit/3350031666414/pesto-rosso-monoprix-gourmet', 'category': 'Conserves', 'product_name': 'Pesto Rosso', 'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/335/003/166/6414/front_fr.26.100.jpg'},
-                            {'url': 'https://fr.openfoodfacts.org/produit/8076809568074/pesto-rustico-legumes-mediteranneens-barilla', 'category': 'Sauces Pesto', 'product_name': 'Pesto rustico légumes méditérannéens', 'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/807/680/956/8074/front_fr.7.100.jpg'},
-                            {'url': 'https://fr.openfoodfacts.org/produit/8076809568050/pesto-rustico-tomates-sechees-concasse-barilla', 'category': 'Sauces Pesto', 'product_name': 'Pesto Rustico Tomates séchées concassé', 'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/807/680/956/8050/front_fr.8.100.jpg'}
-                            ]
+FAKE_RETURN_BESTSUBSTITUT =[{'nutriscore': 'A', 'img': 'https://static.openfoodfacts.org/images/products/800/106/001/4657/front_fr.4.100.jpg', 'magasins': '', 'url': 'https://fr.openfoodfacts.org/produit/8001060014657/pesto-salsa-maestra', 'category': 'Sauces Pesto', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/800/106/001/4657/nutrition_fr.8.400.jpg', 'product_name': 'Pesto'}, {'nutriscore': 'B', 'img': 'https://static.openfoodfacts.org/images/products/346/609/048/4484/front_fr.13.100.jpg', 'magasins': '', 'url': 'https://fr.openfoodfacts.org/produit/3466090484484/soupe-de-poissons-de-roche-au-bec-fin', 'category': 'Sauces Pesto', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/346/609/048/4484/nutrition_fr.8.400.jpg', 'product_name': 'Soupe de poissons de roche'}, {'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/356/470/057/1170/front_fr.37.100.jpg', 'magasins': 'Leclerc', 'url': 'https://fr.openfoodfacts.org/produit/3564700571170/sauce-pesto-au-basilic-frais-turini', 'category': 'Sauces Pesto', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/356/470/057/1170/nutrition_fr.28.400.jpg', 'product_name': 'Sauce Pesto au basilic frais'}, {'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/335/003/166/6414/front_fr.26.100.jpg', 'magasins': 'Monoprix', 'url': 'https://fr.openfoodfacts.org/produit/3350031666414/pesto-rosso-monoprix-gourmet', 'category': 'Conserves', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/335/003/166/6414/nutrition_fr.28.400.jpg', 'product_name': 'Pesto Rosso'}, {'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/807/680/956/8074/front_fr.7.100.jpg', 'magasins': '', 'url': 'https://fr.openfoodfacts.org/produit/8076809568074/pesto-rustico-legumes-mediteranneens-barilla', 'category': 'Sauces Pesto', 'img_nutrition': 'image_ingredients_small_url', 'product_name': 'Pesto rustico légumes méditérannéens'}, {'nutriscore': 'C', 'img': 'https://static.openfoodfacts.org/images/products/807/680/956/8050/front_fr.8.100.jpg', 'magasins': '', 'url': 'https://fr.openfoodfacts.org/produit/8076809568050/pesto-rustico-tomates-sechees-concasse-barilla', 'category': 'Sauces Pesto', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/807/680/956/8050/nutrition_fr.21.400.jpg', 'product_name': 'Pesto Rustico Tomates séchées concassé'}]
+
+
 FAKE_CAT = 'Sauces Pesto'
 
 
 
-
-
-
-FAKE_PRODUCTS = [
-    {'product_name': 'Nutella',
-     'category': 'Pâtes à tartiner aux noisettes et au cacao',
-     'url': 'https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero',
-     'img': 'https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.174.100.jpg',
-     'nutriscore': 'E'},
-    {'product_name': 'Nutella',
-     'category': 'Pâtes à tartiner aux noisettes et au cacao',
-     'url': 'https://fr.openfoodfacts.org/produit/3017624047813/nutella',
-     'img': 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg',
-     'nutriscore': 'E'},
-    {'product_name': 'Nutella',
-     'category': 'Pâtes à tartiner aux noisettes et au cacao',
-     'url': 'https://fr.openfoodfacts.org/produit/3017620401473/nutella-ferrero',
-     'img': 'https://static.openfoodfacts.org/images/products/301/762/040/1473/front_fr.20.100.jpg',
-     'nutriscore': 'E'},
-    {'product_name': 'Nutella',
-     'category': 'Pâtes à tartiner aux noisettes et au cacao',
-     'url': 'https://fr.openfoodfacts.org/produit/59032823/nutella',
-     'img': 'https://static.openfoodfacts.org/images/products/59032823/front_fr.48.100.jpg',
-     'nutriscore': 'E'},
-    {'product_name': 'Nutella',
-     'category': ' en:cocoa-and-hazelnuts-spreads',
-     'url': 'https://fr.openfoodfacts.org/produit/3017620402135/nutella-ferrero',
-     'img': 'https://static.openfoodfacts.org/images/products/301/762/040/2135/front_fr.57.100.jpg',
-     'nutriscore': 'E'},
-    {'product_name': 'Nutella',
-     'category': 'Pateca tartiner',
-     'url': 'https://fr.openfoodfacts.org/produit/3017620421006/nutella-ferrero',
-     'img': 'https://static.openfoodfacts.org/images/products/301/762/042/1006/front_fr.112.100.jpg',
-     'nutriscore': 'E'}
-]
-
-
-
-
+FAKE_PRODUCTS = [{'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.174.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.106.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero', 'category': 'Pâtes à tartiner aux noisettes et au cacao', 'product_name': 'Nutella', 'magasins': 'Intermarché'}, {'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/301/762/404/7813/nutrition_fr.23.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/3017624047813/nutella', 'category': 'Pâtes à tartiner aux noisettes et au cacao', 'product_name': 'Nutella', 'magasins': ''}, {'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/301/762/040/1473/front_fr.20.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/301/762/040/1473/nutrition_fr.16.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/3017620401473/nutella-ferrero', 'category': 'Pâtes à tartiner aux noisettes et au cacao', 'product_name': 'Nutella', 'magasins': ''}, {'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/59032823/front_fr.48.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/59032823/nutrition_fr.37.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/59032823/nutella', 'category': 'Pâtes à tartiner aux noisettes et au cacao', 'product_name': 'Nutella', 'magasins': 'Auchan,ΑΒ Βασιλόπουλος'}, {'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/301/762/040/2135/front_fr.57.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/301/762/040/2135/nutrition_fr.32.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/3017620402135/nutella-ferrero', 'category': ' en:cocoa-and-hazelnuts-spreads', 'product_name': 'Nutella', 'magasins': 'Netto,Carrefour,Cora,Leclerc,Intermarché'}, {'nutriscore': 'E', 'img': 'https://static.openfoodfacts.org/images/products/301/762/042/1006/front_fr.112.100.jpg', 'img_nutrition': 'https://static.openfoodfacts.org/images/products/301/762/042/1006/nutrition_fr.75.400.jpg', 'url': 'https://fr.openfoodfacts.org/produit/3017620421006/nutella-ferrero', 'category': 'Pateca tartiner', 'product_name': 'Nutella', 'magasins': 'Carrefour,Magasins U'}]
 
 
 
@@ -71,9 +29,6 @@ FAKE_PRODUCTS = [
 
 FAKE_URL = "https://fr.openfoodfacts.org/cgi/search" \
                    ".pl?search_terms=nutella&search_simple=1&action=process&json=1"
-
-
-
 
 
 
