@@ -183,13 +183,6 @@ class CustomLoginView(LoginAjaxMixin, SuccessMessageMixin, LoginView):
 class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'quality/registration/signup.html'
-    success_message = 'Création de compte réussie ! Vous etes à présent connecté'
-
-    def get_context_data(self, **kwargs):
-        '''to catch context, especially success_message'''
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.get_form()
-        return context
 
     def get_success_url(self):
         #log user after register
@@ -199,9 +192,8 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
-
             referer_url = self.request.META.get('HTTP_REFERER')
-
+            messages.success(self.request, ('Création de compte réussie ! Vous etes à présent connecté !'))
             return referer_url
 
 
