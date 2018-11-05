@@ -196,12 +196,13 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
         username = self.request.POST['username']
         password = self.request.POST['password1']
 
-        user = authenticate(self.request, username=username, password=password)
-        login(self.request, user)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-        referer_url = self.request.META.get('HTTP_REFERER')
+            referer_url = self.request.META.get('HTTP_REFERER')
 
-        return referer_url
+            return referer_url
 
 
 def logout_view(request):
