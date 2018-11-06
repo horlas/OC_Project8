@@ -1,20 +1,16 @@
+
+
 {% extends 'quality/base.html' %}
 {% load static %}
-
 {% block content %}
-<header class="nav_masthead">
-</header>
+<header class="nav_masthead"></header>
 <section id='selected-product' class="product p-4" >
-
    <div class="container my-auto">
-
       <div class="row row-centered">
-
          <div class="col-lg-4 col-md-5 col-sm-4 mx-auto ">
             <h4 class="custom_title">Votre produit selectionné</h4>
             <hr>
-
-             <div class="item">
+            <div class="item">
                <a href="#">
                <span class="notify-badge bg-primary" >{{request.session.selected_nutriscore}}</span>
                <img class="product_img img-fluid rounded"  src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}" >
@@ -27,8 +23,7 @@
          <div class="col-lg-4 col-md-5 col-sm-4 mx-auto ">
             <h4 class="custom_title">Votre produit substituant</h4>
             <hr>
-
-             <div class="item">
+            <div class="item">
                <a href="#">
                <span class="notify-badge bg-primary" >{{request.session.substitut_nutriscore}}</span>
                <img class="product_img img-fluid rounded"  src="{{request.session.substitut_img}}" alt="{{request.session.substitut_name}}" >
@@ -37,12 +32,7 @@
             <div class="carousel-caption  ">
                <h5 class=" custom-color" >{{request.session.substitut_name}}</h5>
             </div>
-
          </div>
-
-
-
-
       </div>
    </div>
 </section>
@@ -51,9 +41,8 @@
       <hr>
       <div class="text-center text-account"
       {% include 'quality/search_product.html' %}
-      </div>
+   </div>
    </div>
 </section>
-
-
 {% endblock %}
+

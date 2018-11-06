@@ -85,11 +85,11 @@ def best_substitut(cat):
                 list.append(dict)
     return data_process(list)
 
-if __name__ == '__main__':
-
-    cat = 'Mini saucissons secs'
-    data = best_substitut(cat)
-    print(len(data), data[0]['img_nutrition'], data[5]['nutriscore'], data)
+# if __name__ == '__main__':
+#
+#     cat = 'Mini saucissons secs'
+#     data = best_substitut(cat)
+#     print(len(data), data[0]['img_nutrition'], data[5]['nutriscore'], data)
 
     #
     # query = 'cereale'
