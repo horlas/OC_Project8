@@ -1,10 +1,9 @@
 # Create your views here.
-from django.shortcuts import render, redirect,  get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from django.contrib.auth.views import LoginView
-from  django.contrib.auth import REDIRECT_FIELD_NAME, logout
+from  django.contrib.auth import logout
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
 from django.views import generic
 from bootstrap_modal_forms.mixins import LoginAjaxMixin, PassRequestMixin
 from .methods import query_off, best_substitut
@@ -13,9 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-
-from django.views.generic import TemplateView
-from django.http import HttpResponse, HttpResponseRedirect
+import re
 
 def accueil(request):
     return render(request, 'quality/index.html')
@@ -50,7 +47,7 @@ def query_data(request):
             title = 'Votre recherche est :  "{}"'. format(query)
             context = {
                 'title': title,
-                'data' : data
+                'data': data
             }
 
     return render(request, 'quality/query_data.html', context)
@@ -63,7 +60,12 @@ def sub_product(request):
 
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
+    print(choices)
 
+    # we remove some names with parentheses
+    m = re.search('(\((.*?)\))', choices)
+    if m is not None:
+        choices = choices.replace(m.group(0), "")
 
     #split the checkbox's return in order to make a python list
     choices = choices.split(', ')
@@ -91,9 +93,11 @@ def user_choice(request):
      The substitute product is recorded in the session for display.'''
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
-
+    print(choices)
     # split the checkbox's return in order to make a python list
     choices = choices.split(', ')
+    print(len(choices), choices)
+
 
     # record selected product in database
     p_selected = SelectedProduct.objects.create(
@@ -116,6 +120,8 @@ def user_choice(request):
         img = choices[2],
         n_grade = choices[3],
         url = choices[4],
+        img_nutrition = choices[5],
+        store = choices[6],
 
         backup_id = backup,
         user_id = request.user,

@@ -142,6 +142,8 @@ header.custom_masthead {
 
 .custom_title {
     color: #345a61;
+    font-family: 'Scope One', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: bold;
 }
 
 
@@ -173,7 +175,7 @@ section.product {
     /*float: none;*/
 /*}*/
 
-
+/*to display notification badge*/
 .item {
     position:relative;
     padding-top:20px;
@@ -189,7 +191,6 @@ section.product {
     border-radius: 20px 20px 20px 20px;
     color: blanchedalmond;
     padding:5px 10px;
-    /*font-size:20px;*/
 }
 
 

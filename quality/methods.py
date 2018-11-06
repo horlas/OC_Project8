@@ -52,13 +52,13 @@ def data_process(products):
         dict = {
             'product_name': products[i].get('product_name', 'Non renseigné'),
             'nutriscore': products[i].get('nutrition_grades', 'NC').upper(),
-            'img': products[i].get('image_thumb_url', 'image_ingredients_small_url'),
+            'img': products[i].get('image_front_url', 'image_ingredients_small_url'),
 
             # keep the last category the most significant
             'category': products[i]['categories'].split(',')[-1],
             'url': products[i]['url'],
-            'img_nutrition'  : products[i].get('image_nutrition_url', 'image_ingredients_small_url'),
-            'magasins': products[i].get('stores', 'NC')
+            'img_nutrition': products[i].get('image_nutrition_url', 'Non renseigné'),
+            'magasins': products[i].get('stores', 'Non renseigné')
         }
         list.append(dict)
 
@@ -87,11 +87,11 @@ def best_substitut(cat):
 
 if __name__ == '__main__':
 
-    # cat = 'Sauces Pesto'
-    # data = best_substitut(cat)
-    # print(len(data), data[0]['nutriscore'], data[5]['nutriscore'], data)
+    cat = 'Mini saucissons secs'
+    data = best_substitut(cat)
+    print(len(data), data[0]['img_nutrition'], data[5]['nutriscore'], data)
 
     #
-    query = 'Nutella'
-    data = query_off(query)
-    print(data)
+    # query = 'cereale'
+    # data = query_off(query)
+    # print(data)

@@ -4,41 +4,43 @@
 
 {% block content %}
 
-<header class="masthead text-center d-flex">
+<header class="nav_masthead ">
    <div class="container my-auto">
-      <div class="row">
-         <div class="col-lg-12 mx-auto">
+      <div class="row row-centered">
+         <div class="col-lg-6 col-md-5 col-sm-4 mx-auto ">
+             {% include 'quality/display_messages.html' %}
 
-            {% include 'quality/display_messages.html' %}
-
-            <h4 class="text-uppercase" style="color : orangered">
+<h4 class="text-uppercase custom-color p-4" >
                <strong>{{title}}</strong>
             </h4>
-               <h5 class="text-account"><strong>Voir les produits </strong></h5>
-              <a href="#choice" class="js-scroll-trigger"><i href="#choice" class="fas fa-angle-double-down fa-3x mb-3"></i></a>
          </div>
       </div>
    </div>
+
 </header>
-<section id="choice" class="bg-product d-flex " >
+<section id='choice' class="bg-footer p-4 text-center" >
    <div  class="container my-auto">
-      <div class="card-deck  justify-content-center">
+
+      <h3 class="custom_title pb-3"> Choisissez le produit pour lequel vous voulez un substituant : </h3>
+      <div class="row">
          {% for dict_item in data %}
-         <form action="{% url 'quality:sub_product' %}" method="GET">
-            <div class="card mb-lg-4 p-1">
-               <img class="card-img-top img-card" src="{{dict_item.img}}" alt="{{dict_item.product_name}}">
-               <div class="card-body">
-                  <h5 class="card-title">{{dict_item.product_name}}</h5>
-                  <ul class = "list-group list-group-flush">
-                     <li  class="list-group-item">Catégorie : {{dict_item.category}}</li>
-                     <li class="list-group-item">Nutriscore : {{dict_item.nutriscore}}</li>
-                     <li class="list-group-item">
-                        <button type="submit" class="btn btn-primary" name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}">Selectionner </button>
-                     </li>
-                  </ul>
+         <div class="col-lg-4 col-md-6 col-sm-6 col-xl-2 text-center">
+            <form action="{% url 'quality:sub_product' %}" method="GET">
+               <div class="item">
+                  <a href="#">
+                  <span class="notify-badge good-product" >{{dict_item.nutriscore}}</span>
+                  <img class="product_img img-fluid rounded"  src="{{dict_item.img}}" alt="{{dict_item.product_name}}" >
+                  </a>
                </div>
-            </div>
-         </form>
+               <div class="carousel-caption mb-5 ">
+                  <h5 class="custom-color ">{{dict_item.product_name}}</h5>
+               </div>
+               <button type="submit" class="btn btn-outline-light text-icone mt-3 "name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}">
+               <i class="fas fa-utensils fa-2x text-icone sr-save-1 "></i>
+               Selectionner
+               </button>
+            </form>
+         </div>
          {% endfor %}
       </div>
    </div>

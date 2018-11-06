@@ -18,7 +18,7 @@
                </a>
             </div>
             <div class="carousel-caption  ">
-               <h1 class=" custom-color" >{{request.session.selected_name}}</h1>
+               <h5 class=" custom-color" >{{request.session.selected_name}}</h5>
             </div>
          </div>
       </div>
@@ -27,7 +27,7 @@
 <section id='choice' class="bg-footer p-4 text-center" >
    <div  class="container my-auto">
       {% if user.is_authenticated %}
-      <h2 class="custom_title pb-3"> Vous pouvez remplacer ce produit par : </h2>
+      <h3 class="custom_title pb-3"> Vous pouvez remplacer ce produit par : </h3>
       <div class="row">
          {% for dict_item in data %}
          <div class="col-lg-4 col-md-6 col-sm-6 col-xl-2 text-center">
@@ -41,7 +41,8 @@
                <div class="carousel-caption mb-5 ">
                   <h5 class="custom-color ">{{dict_item.product_name}}</h5>
                </div>
-               <button type="submit" class="btn btn-outline-light text-icone mt-3 " name="subscribe" value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}">
+               <button type="submit" class="btn btn-outline-light text-icone mt-3 " name="subscribe"
+                       value="{{dict_item.product_name}}, {{dict_item.category}}, {{dict_item.img}}, {{dict_item.nutriscore}}, {{dict_item.url}}, {{dict_item.img_nutrition}}, {{dict_item.magasins}}">
                <i class="fas fa-save fa-2x text-icone sr-save-1 "></i>
                Sauvegarder
                </button>

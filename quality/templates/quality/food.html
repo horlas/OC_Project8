@@ -3,51 +3,87 @@
 
 {% block content %}
 
+<header class="nav_masthead">
+</header>
+<section id='selected-product' class="product p-4" >
 
-<header class="custom_masthead text-center">
    <div class="container my-auto">
-      <div class="row">
-         <span class="col-lg-12 mx-auto pt-3 custom-color">
-            <h4 class="custom_title">Aliment cherché</h4>
+
+      <div class="row row-centered">
+
+         <div class="col-lg-4 col-md-5 col-sm-4 mx-auto ">
+            <h4 class="custom_title">Aliment sauvegardé</h4>
             <hr>
-            <div class="d-inline-flex justify-content-around align-items-center">
-               {% for sel_product  in sel_products %}
-               <img class="card-img-top img-card" src="{{sel_product.img}}" alt="{{sel_product.name}}">
-               <h5>{{sel_product.name}}</h5>
-               {% endfor %}
+            {% for sub_product  in sub_products %}
+            <div class="item">
+               <a href="#">
+               <span class="notify-badge bg-primary" >{{sub_product.n_grade}}</span>
+               <img class="product_img img-fluid rounded"  src="{{sub_product.img}}" alt="{{sub_product.name}}" >
+               </a>
             </div>
-            <h4 class="custom_title">  Vous pouvez remplacer cet aliment par :  </h4>
-            <hr>
-            {% for sub_product in sub_products %}
-            <div class="d-inline-flex justify-content-around align-items-center">
-            <div class="card" style="width: 18rem;">
-               <img class="card-img-top img-card" src="{{sub_product.img}}" alt="{{sub_product.name}}">
-               <div class="card-body">
-                  <h5 class="card-title">{{sub_product.name}}</h5>
-                  <ul class = "list-group list-group-flush">
-                     <li  class="list-group-item">Catégorie : {{sub_product.category}}</li>
-                     <li class="list-group-item">Nutriscore : {{sub_product.n_grade}}</li>
-                     <li class="list-group-item"><a target="_blank" href="{{sub_product.url}}">Fiche produit </a></li>
-                  </ul>
-               </div>
+            <div class="carousel-caption  ">
+               <h4 class="custom-color" >{{sub_product.name}}</h4>
             </div>
-            </div>
-            {% endfor %}
-            <div>
-               <span class="step-links">
-               {% if sub_products.has_previous %}
-               <a href="?page=1"><< premier</a>
-               <a href="?page={{ sub_products.previous_page_number }}">précédent</a>
-               {% endif %}
-               <span class="current">
-               Page {{ sub_products.number }} sur {{ sub_products.paginator.num_pages }}.
-               </span>
-               {% if sub_products.has_next %}
-               <a href="?page={{ sub_products.next_page_number }}">suivant</a>
-               <a href="?page={{ sub_products.paginator.num_pages }}">dernier &raquo;</a>
-               {% endif %}
-               </span>
-            </div>
+
+         </div>
+      </div>
+   </div>
+</section>
+<section id='choice' class="bg-footer p-4 text-center" >
+   <div  class="container my-auto">
+ <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
+        <h5 class="custom_title">Magasin où l'acheter : </h5>
+        <h5 class="custom_title">{{sub_product.store}} </h5>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
+       <h5 class="custom_title">Valeur nutritionnelle pour 100g  </h5>
+       <img class="product_img img-fluid rounded"  src="{{sub_product.img_nutrition}}" alt="{{sub_product.name}}" >
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
+       <a target="_blank" href="{{sub_product.url}}" ><h5 class="custom_title">Lien vers la fiche produit </h5></a>
+    </div>
+    {% endfor %}
+
+    {% for sel_product  in sel_products %}
+
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
+       <h5 class="custom_title">Ce produit remplace  </h5>
+
+         <div class="item">
+               <a href="#">
+               <span class="notify-badge bg-primary" >{{sel_product.n_grade}}</span>
+               <img class="product_img img-fluid rounded"  src="{{sel_product.img}}" alt="{{sel_product.name}}" >
+               </a>
+         </div>
+         <div class="carousel-caption  ">
+            <h4 class=" custom-color" >{{sel_product.name}}</h4>
+         </div>
+    </div>
+    {% endfor %}
+ </div>
+
+<!--pagination-->
+   <div class="mt-5">
+   <span class="step-links">
+   {% if sub_products.has_previous %}
+   <a href="?page=1"><< premier</a>
+   <a href="?page={{ sub_products.previous_page_number }}">précédent</a>
+   {% endif %}
+   <span class="current">
+   Page {{ sub_products.number }} sur {{ sub_products.paginator.num_pages }}.
+   </span>
+   {% if sub_products.has_next %}
+   <a href="?page={{ sub_products.next_page_number }}">suivant</a>
+   <a href="?page={{ sub_products.paginator.num_pages }}">dernier &raquo;</a>
+   {% endif %}
+   </span>
+</div>
+
+</section>
+
+
+<!-- développement en cours: pagination -->
     <!--<div class="container">-->
              <!--{% if sub_products.has_other_pages %}-->
                  <!--<ul class="pagination">-->
@@ -72,12 +108,6 @@
                     <!--</ul>-->
              <!--{% endif %}-->
     <!--</div>-->
-
-         </div>
-      </div>
-   </div>
-   </div>
-</header>
 
 {% endblock %}
 
