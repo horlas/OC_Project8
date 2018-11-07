@@ -60,7 +60,7 @@ def sub_product(request):
 
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
-    print(choices)
+
 
     # we remove some names with parentheses
     m = re.search('(\((.*?)\))', choices)
@@ -93,10 +93,10 @@ def user_choice(request):
      The substitute product is recorded in the session for display.'''
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
-    print(choices)
+
     # split the checkbox's return in order to make a python list
     choices = choices.split(', ')
-    print(len(choices), choices)
+
 
 
     # record selected product in database
