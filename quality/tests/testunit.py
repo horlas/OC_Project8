@@ -27,7 +27,7 @@ class MyTestCase(TestCase):
 
 class QueryOffTest(MyTestCase):
     def test_data_process_results(self):
-        '''we tested that data_process returns a list of 6 products, containing 5 items,
+        '''we tested that data_process returns a list of 6 products, containing 7 items,
          with the following data'''
 
         products = self.results
@@ -35,7 +35,7 @@ class QueryOffTest(MyTestCase):
         self.assertEqual(data_process(products)[0].__len__(), 7)
         #test some stuff among the list
         self.assertEqual(data_process(products)[0]['product_name'], 'Nutella')
-        self.assertEqual(data_process(products)[1]['img'], 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.100.jpg')
+        self.assertEqual(data_process(products)[1]['img'], 'https://static.openfoodfacts.org/images/products/301/762/404/7813/front_fr.42.400.jpg')
         self.assertEqual(data_process(products)[2]['url'], 'https://fr.openfoodfacts.org/produit/3017620401473/nutella-ferrero')
         self.assertEqual(data_process(products)[3]['category'], 'Pâtes à tartiner aux noisettes et au cacao')
         self.assertEqual(data_process(products)[4]['nutriscore'], 'E')

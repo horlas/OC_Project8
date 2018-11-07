@@ -65,7 +65,7 @@ class SubProductTestCase(MyTestCase):
 
 class UserChoiceTestCase(MyTestCase):
     def test_user_choice_page(self):
-        request = self.factory.get('/quality/sub_product/' , {'subscribe': FAKE_DATA_USER_CHOICES2})
+        request = self.factory.get('/quality/sub_product/', {'subscribe': FAKE_DATA_USER_CHOICES2})
         request.user = self.user
         # adding session
         middleware = SessionMiddleware()
