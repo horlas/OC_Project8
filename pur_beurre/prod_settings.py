@@ -2,7 +2,7 @@ import dj_database_url
 from pur_beurre.settings import *
 
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
