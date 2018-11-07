@@ -38,7 +38,7 @@
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
        <h5 class="custom_title">Valeur nutritionnelle pour 100g  </h5>
-       <img class="product_img img-fluid rounded"  src="{{sub_product.img_nutrition}}" alt="{{sub_product.name}}" >
+        <a href="{{sub_product.img_nutrition}}"><img class="product_img img-fluid rounded" src="{{sub_product.img_nutrition}}" alt="{{sub_product.name}}" title="Cliquer pour agrandir"></a>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6 col-xl-2 text-center">
        <a target="_blank" href="{{sub_product.url}}" ><h5 class="custom_title">Lien vers la fiche produit </h5></a>
@@ -81,16 +81,5 @@
 </div>
 
 </section>
-
-{% endblock %}
-
-{% block javascript %}
-
-<script type="text/javascript">
-
-$(document).ready(function () {
-    $(".pagination").rPage();
-});
-</script>
 
 {% endblock %}
