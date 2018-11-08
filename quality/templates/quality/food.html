@@ -16,10 +16,10 @@
             <hr>
             {% for sub_product  in sub_products %}
             <div class="item">
-               <a href="#">
+
                <span class="notify-badge bg-primary" >{{sub_product.n_grade}}</span>
                <img class="product_img img-fluid rounded"  src="{{sub_product.img}}" alt="{{sub_product.name}}" >
-               </a>
+
             </div>
             <div class="carousel-caption  ">
                <h4 class="custom-color" >{{sub_product.name}}</h4>
@@ -51,10 +51,10 @@
        <h5 class="custom_title">Ce produit remplace  </h5>
 
          <div class="item">
-               <a href="#">
+
                <span class="notify-badge bg-primary" >{{sel_product.n_grade}}</span>
                <img class="product_img img-fluid rounded"  src="{{sel_product.img}}" alt="{{sel_product.name}}" >
-               </a>
+
          </div>
          <div class="carousel-caption  ">
             <h4 class=" custom-color" >{{sel_product.name}}</h4>

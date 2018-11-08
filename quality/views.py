@@ -61,12 +61,6 @@ def sub_product(request):
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
 
-
-    # we remove some names with parentheses
-    m = re.search('(\((.*?)\))', choices)
-    if m is not None:
-        choices = choices.replace(m.group(0), "")
-
     #split the checkbox's return in order to make a python list
     choices = choices.split(', ')
 

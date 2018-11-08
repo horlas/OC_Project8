@@ -1,4 +1,5 @@
 import requests
+import re
 
 
 
@@ -62,6 +63,20 @@ def data_process(products):
         }
         list.append(dict)
 
+
+    # processing of product names
+    # in some case product_names have () or, inside
+    # which prevents the correct operation of the rest of the program
+    for i in range(len(list)):     # len(list) in case lenght list < 6
+        m1 = re.search('(\,.*?$)', list[i]['product_name'])
+        if m1 is not None:
+            list[i]['product_name'] = list[i]['product_name'].replace(m1.group(0), '')
+
+        m2 = re.search('(\(.*?$)', list[i]['product_name'])
+        if m2 is not None:
+            list[i]['product_name'] = list[i]['product_name'].replace(m2.group(0), '')
+
+
     return list
 
 def query_off(query):
@@ -92,6 +107,6 @@ if __name__ == '__main__':
     # print(len(data), data[0]['img_nutrition'], data[5]['nutriscore'], data)
 
     #
-    query = 'Nutella'
+    query = 'Pesto'
     data = query_off(query)
     print(data)

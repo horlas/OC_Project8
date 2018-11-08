@@ -11,10 +11,10 @@
             <h4 class="custom_title">Votre produit selectionné</h4>
             <hr>
             <div class="item">
-               <a href="#">
+
                <span class="notify-badge bg-primary" >{{request.session.selected_nutriscore}}</span>
                <img class="product_img img-fluid rounded"  src="{{request.session.selected_img}}" alt="{{request.session.selected_name}}" >
-               </a>
+
             </div>
             <div class="carousel-caption  ">
                <h5 class=" custom-color" >{{request.session.selected_name}}</h5>
@@ -24,10 +24,10 @@
             <h4 class="custom_title">Votre produit substituant</h4>
             <hr>
             <div class="item">
-               <a href="#">
+
                <span class="notify-badge bg-primary" >{{request.session.substitut_nutriscore}}</span>
                <img class="product_img img-fluid rounded"  src="{{request.session.substitut_img}}" alt="{{request.session.substitut_name}}" >
-               </a>
+
             </div>
             <div class="carousel-caption  ">
                <h5 class=" custom-color" >{{request.session.substitut_name}}</h5>
