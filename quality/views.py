@@ -33,16 +33,16 @@ def query_data(request):
         context = {'title': title }
         return render(request, 'quality/index.html', context)
     else:
-        #query_off function calls OFF API and return 6 products
+        # query_off function calls OFF API and return 6 products
         data = query_off(query)
 
-        #in case of invalid user entry
+        # in case of invalid user entry
         if not data:
             title = 'Votre recherche "{}" n \' a donné aucun resultat!'.format(query)
             context = {'title': title}
             return render(request , 'quality/index.html' , context)
 
-        #in case of valid entry
+        # in case of valid entry
         else:
             title = 'Votre recherche est :  "{}"'. format(query)
             context = {
@@ -61,17 +61,17 @@ def sub_product(request):
     # get the user choice from the checkbox
     choices = request.GET.get('subscribe', None)
 
-    #split the checkbox's return in order to make a python list
+    # split the checkbox's return in order to make a python list
     choices = choices.split(', ')
 
-    #record selected product in session
+    # record selected product in session
     record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
     for value , choice in zip(record_session , choices):
         request.session[value] = choice
 
     cat = request.session['selected_category']
 
-    #request to OpenFoodFact and return six best products with the same category
+    # request to OpenFoodFact and return six best products with the same category
     data = best_substitut(cat)
     title = 'six produits meilleurs ont été trouvés dans la catégorie {}'.format(cat)
     context = {
@@ -140,7 +140,7 @@ def food(request):
     '''View which display page of Aliments . firstly we are looking for the connected user,
     then we are looking for all backups related to this user, the display supports pagination'''
 
-    #define the connected user
+    # define the connected user
     user = request.user
 
     # request inner join on selectedproduct/Backup/substitutproduct
@@ -152,7 +152,7 @@ def food(request):
     # Get current page
     page = request.GET.get('page', 1)
     try:
-        #return only the first product and not the others
+        # return only the first product and not the others
         sel_products = paginator0.page(page)
         sub_products = paginator1.page(page)
 
@@ -161,7 +161,7 @@ def food(request):
         sel_products = paginator0.page(1)
         sub_products = paginator1.page(1)
     except EmptyPage:
-        #If page out of range (e.g 99999), deliver last page of results.
+        # If page out of range (e.g 99999), deliver last page of results.
         sel_products = paginator0.page(paginator0.num_pages)
         sub_products = paginator1.page(paginator1.num_pages)
     context = {
@@ -185,7 +185,7 @@ class SignUpView(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
     template_name = 'quality/registration/signup.html'
 
     def get_success_url(self):
-        #log user after register
+        # log user after register
         username = self.request.POST['username']
         password = self.request.POST['password1']
 
