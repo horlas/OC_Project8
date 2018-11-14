@@ -25,36 +25,39 @@ class MyTestCase(TestCase):
         self.p_selected = FAKE_DATA_SELECTED_PRODUCT
 
 class AccueilTest(MyTestCase):
-    def test_accueil(self):
-        request = self.factory.get('')
-        response = accueil(request)
+    '''example with Client()'''
+    def test_accueil_client(self):
+        response = self.client.get(reverse('quality:accueil'))
         self.assertEqual(response.status_code , 200)
 
 class CreditsTest(MyTestCase):
+    '''example with Request Factory'''
+
     def test_credits(self):
         request = self.factory.get('/quality/credits/')
         response = credits(request)
-        self.assertEqual(response.status_code , 200)
+        self.assertEqual(response.status_code, 200)
 
 class QueryDataTest(MyTestCase):
+
     def test_query_data(self):
         request = self.factory.get('/quality/query_data/')
         response = query_data(request)
-        self.assertEqual(response.status_code , 200)
+        self.assertEqual(response.status_code, 200)
 
 class SubProductTestCase(MyTestCase):
 
-    @patch('quality.methods.best_substitut') # la fonction que l'on souhaite patcher
+    @patch('quality.methods.best_substitut')  # la fonction que l'on souhaite patcher
     def test_sub_product_page(self, mock_best_substitut):
 
-        mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT # return fake datas
-
-        request = self.factory.get('/quality/sub_product/', {'subscribe' : self.choices}) #self.choices = FAKE_DATA_USER_CHOICES
+        mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT  # return fake datas
+        # initialize Request Factory with self.choices in entry
+        request = self.factory.get('/quality/sub_product/', {'subscribe': self.choices})  # self.choices = FAKE_DATA_USER_CHOICES
+        # initialize user
         request.user = self.user
-        #adding session
+        # adding session
         middleware = SessionMiddleware()
         middleware.process_request(request)
-
         request.session.save()
         record_session = self.record_selected_session
         for values in record_session:
@@ -62,6 +65,21 @@ class SubProductTestCase(MyTestCase):
 
         response = sub_product(request)
         self.assertEqual(response.status_code , 200)
+
+
+
+    # @patch('quality.methods.best_substitut')  # la fonction que l'on souhaite patcher
+    # def test_sub_product_page(self , mock_best_substitut):
+    #     mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT  # return fake datas
+    #
+    #     response = self.client.get(reverse('quality:sub_product'), {'subscribe': self.choices})
+    #     session = self.client.session
+    #     # session = self.record_selected_session
+    #     for values in self.record_selected_session:
+    #         session[values] = values
+    #
+    #     self.assertEqual(response.status_code , 200)
+
 
 class UserChoiceTestCase(MyTestCase):
     def test_user_choice_page(self):

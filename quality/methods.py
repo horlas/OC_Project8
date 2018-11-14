@@ -1,5 +1,7 @@
 import requests
 import re
+import json
+import pickle
 
 
 
@@ -109,6 +111,7 @@ def query_off(query):
     response = requests.get(url)
     result = response.json()
     products = result['products'][:20]
+
     return data_process(products)
 
 def best_substitut(cat):
@@ -130,6 +133,6 @@ if __name__ == '__main__':
     # print(len(data), data[0]['img_nutrition'], data[5]['nutriscore'], data)
 
     #
-    query = 'Pesto'
+    query = 'Speculos'
     data = query_off(query)
-    print(data)
+    # print(data)
