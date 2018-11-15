@@ -66,7 +66,7 @@ def sub_product(request):
 
     # record selected product in session
     record_session = ['selected_name', 'selected_category', 'selected_img', 'selected_nutriscore', 'selected_url']
-    for value , choice in zip(record_session , choices):
+    for value, choice in zip(record_session, choices):
         request.session[value] = choice
 
     cat = request.session['selected_category']

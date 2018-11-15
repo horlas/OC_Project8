@@ -66,17 +66,18 @@ class SubProductTestCase(MyTestCase):
         response = sub_product(request)
         self.assertEqual(response.status_code , 200)
 
-
-
+    #
+    #
     # @patch('quality.methods.best_substitut')  # la fonction que l'on souhaite patcher
     # def test_sub_product_page(self , mock_best_substitut):
     #     mock_best_substitut.return_value = FAKE_RETURN_BESTSUBSTITUT  # return fake datas
     #
-    #     response = self.client.get(reverse('quality:sub_product'), {'subscribe': self.choices})
-    #     session = self.client.session
-    #     # session = self.record_selected_session
-    #     for values in self.record_selected_session:
-    #         session[values] = values
+    #
+    #
+    #     response = self.client.get(reverse('quality:sub_product'), FAKE_DATA_USER_CHOICES)
+    #     (response.context['data'])
+    #
+    #
     #
     #     self.assertEqual(response.status_code , 200)
 
